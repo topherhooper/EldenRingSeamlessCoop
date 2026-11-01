@@ -149,7 +149,7 @@ def render():
 
     out += ["", "## Catch-up", ""]
     if len(players) < 2:
-        out.append("Shows up once two or more players have synced.")
+        out += ["Shows up once two or more players have synced.", ""]
     for p in players:
         name, others = p["player"], [o for o in players if o["player"] != p["player"]]
         if not others:
