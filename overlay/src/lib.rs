@@ -72,6 +72,29 @@ pub(crate) fn input_blocked() -> bool {
     INPUT_BLOCKED.load(Ordering::Relaxed)
 }
 
+/// Appends a line to catchup_overlay.log next to the DLL, started fresh each game launch, so
+/// a problem in someone's game can be traced without a debugger.
+pub(crate) fn log(message: impl AsRef<str>) {
+    use std::io::Write;
+    static FILE: std::sync::OnceLock<Option<std::sync::Mutex<fs::File>>> =
+        std::sync::OnceLock::new();
+    let file = FILE.get_or_init(|| {
+        let path = hudhook::util::get_dll_path()?.with_file_name("catchup_overlay.log");
+        fs::File::create(path).ok().map(std::sync::Mutex::new)
+    });
+    if let Some(Ok(mut f)) = file.as_ref().map(|m| m.lock()) {
+        let t = unsafe { GetLocalTime() };
+        let _ = writeln!(
+            f,
+            "{:02}:{:02}:{:02} {}",
+            t.wHour,
+            t.wMinute,
+            t.wSecond,
+            message.as_ref()
+        );
+    }
+}
+
 /// Fires once when a key or button goes down, then repeats while it's held.
 #[derive(Default)]
 struct Repeat {
@@ -143,13 +166,20 @@ struct Overlay {
     /// Modified times of the files `data` was built from.
     stamps: Vec<(PathBuf, Option<SystemTime>)>,
     last_check: Option<Instant>,
-    has_bold: bool,
+    /// Font atlas indices of the semibold and title fonts, if Windows has them.
+    bold_font: Option<usize>,
+    title_font: Option<usize>,
     /// Index into the boss rows of the menu.
     cursor: usize,
     scroll_to_cursor: bool,
     target: Option<Target>,
     /// A target name read from TARGET_FILE, waiting for the list to load.
     saved_target: Option<String>,
+    /// The game has drawn a frame. The DLL loads before the game draws anything, so the start-up
+    /// hint is timed from the first frame instead.
+    drawing: bool,
+    /// A character is loaded, as far as the compass can tell.
+    in_world: bool,
 }
 
 impl Overlay {
@@ -181,6 +211,9 @@ impl Overlay {
                 (settings::parse(settings::TEMPLATE).0, vec![message])
             }
         };
+        for p in &problems {
+            log(format!("Setup: {p}"));
+        }
         let saved_target = fs::read_to_string(dir.join(TARGET_FILE))
             .ok()
             .map(|t| t.trim().to_string())
@@ -204,11 +237,14 @@ impl Overlay {
             data: Err(String::new()),
             stamps: Vec::new(),
             last_check: None,
-            has_bold: false,
+            bold_font: None,
+            title_font: None,
             cursor: 0,
             scroll_to_cursor: false,
             target: None,
             saved_target,
+            drawing: false,
+            in_world: false,
         }
     }
 
@@ -246,6 +282,15 @@ impl Overlay {
         let before = self.data.as_ref().map(|c| c.boss_count()).ok();
         self.data = catchup::load(&self.settings.repo, self.settings.player.as_deref());
         self.stamps = stamps;
+        log(match &self.data {
+            Ok(c) => format!(
+                "Loaded progress for {} with {} other players: {} bosses to catch up on",
+                c.me.player,
+                c.others.len(),
+                c.boss_count()
+            ),
+            Err(e) => format!("Couldn't load progress: {e}"),
+        });
         if let Ok(c) = &self.data {
             if before.is_some_and(|b| b != c.boss_count()) {
                 self.hint_until = Instant::now() + HINT_FOR;
@@ -422,22 +467,6 @@ impl Overlay {
         }
     }
 
-    /// How to use the menu, with the controller's button names when one is connected.
-    fn menu_hint(&self, on_target: bool) -> String {
-        let pick = if on_target {
-            "clear target"
-        } else {
-            "set target"
-        };
-        if self.pad.any_connected() {
-            let style = self.pad_style();
-            let name = |bit| settings::button_label(bit, style);
-            format!("D-pad: move · {}: {pick} · {}: close", name(A), name(B))
-        } else {
-            format!("Arrows: move · Enter: {pick} · Esc: close")
-        }
-    }
-
     // --- Compass -------------------------------------------------------------------------------
 
     /// The player's global position on the overworld, if the game says where they are.
@@ -489,24 +518,18 @@ impl Overlay {
     // --- Drawing -------------------------------------------------------------------------------
 
     fn bold_text(&self, ui: &Ui, colour: [f32; 4], text: &str) {
-        let bold = self
-            .has_bold
-            .then(|| ui.fonts().fonts().get(1).copied())
-            .flatten();
-        let _font = bold.map(|f| ui.push_font(f));
-        ui.text_colored(colour, text);
+        self.text_in_font(ui, self.bold_font, colour, text);
     }
 
-    /// The dimmer text after a line's main text, moved to the next line if it won't fit.
-    fn aside(&self, ui: &Ui, text: &str, wrap: f32) {
-        if text.is_empty() {
-            return;
-        }
-        ui.same_line();
-        if ui.cursor_pos()[0] + ui.calc_text_size(text)[0] > wrap {
-            ui.new_line();
-        }
-        ui.text_colored(DIM, text);
+    /// The menu title, in a serif face like the game's own menus.
+    fn title_text(&self, ui: &Ui, colour: [f32; 4], text: &str) {
+        self.text_in_font(ui, self.title_font.or(self.bold_font), colour, text);
+    }
+
+    fn text_in_font(&self, ui: &Ui, index: Option<usize>, colour: [f32; 4], text: &str) {
+        let font = index.and_then(|i| ui.fonts().fonts().get(i).copied());
+        let _font = font.map(|f| ui.push_font(f));
+        ui.text_colored(colour, text);
     }
 
     /// A round compass with an arrow pointing `angle` radians clockwise from straight ahead, or a
@@ -606,157 +629,366 @@ impl Overlay {
         });
     }
 
-    /// The catch-up list, with a cursor for picking the compass target.
+    /// The catch-up menu: a centered panel over the dimmed game, with the list, details of the
+    /// highlighted boss and button prompts.
     fn draw_menu(&mut self, ui: &Ui) {
         let alpha = (self.menu_changed.elapsed().as_secs_f32() / FADE_IN).min(1.0);
         let scroll = std::mem::take(&mut self.scroll_to_cursor);
         let this = &*self;
-        this.window(ui, alpha, || {
-            let wrap = (ui.current_font_size() * 32.0).min(ui.io().display_size[0] * 0.45);
-            let _wrap = ui.push_text_wrap_pos_with_pos(wrap);
-            let gap = ui.text_line_height() * 0.35;
-            for p in &this.problems {
-                ui.text_colored(WARN, p);
-            }
-            let c = match &this.data {
-                Ok(c) => c,
-                Err(e) => {
-                    if !e.is_empty() {
-                        ui.text_colored(WARN, e);
-                    }
-                    ui.text_colored(DIM, this.menu_hint(false));
-                    return;
-                }
-            };
-            let lines = view::lines(c, local_now());
-            let (header, rest): (Vec<_>, Vec<_>) = lines
-                .iter()
-                .partition(|l| matches!(l.style, Style::Title | Style::Summary));
-            let (body, footer): (Vec<_>, Vec<_>) =
-                rest.into_iter().partition(|l| l.style != Style::Footer);
+        let [screen_w, screen_h] = ui.io().display_size;
+        let font = ui.current_font_size();
 
-            for l in &header {
-                match l.style {
-                    Style::Title => this.bold_text(ui, GOLD, &l.text),
-                    _ => ui.text_colored(TEXT, &l.text),
-                }
-                this.aside(ui, &l.aside, wrap);
-            }
-            match &this.target {
-                Some(t) => {
-                    ui.text_colored(DIM, "Compass:");
-                    ui.same_line();
-                    ui.text_colored(GOLD, &t.name);
-                }
-                None => ui.text_colored(DIM, "Compass: no target"),
-            }
+        // Dim the game: input is blocked while the menu is open, so make that obvious.
+        ui.get_background_draw_list()
+            .add_rect(
+                [0.0, 0.0],
+                [screen_w, screen_h],
+                [0.0, 0.0, 0.0, 0.55 * alpha],
+            )
+            .filled(true)
+            .build();
 
-            let player = this.player_position().ok().map(|(p, _)| p);
-            if !body.is_empty() {
-                ui.dummy([0.0, gap]);
-                let row_height = ui.text_line_height_with_spacing();
-                let regions = body.iter().filter(|l| l.style == Style::Region).count();
-                let full =
-                    body.len() as f32 * row_height + regions as f32 * (gap + row_height * 0.2);
-                let height = full.min(ui.io().display_size[1] * 0.55);
-                ui.child_window("##list").size([wrap, height]).build(|| {
-                    let mut row = 0;
-                    let mut first = true;
-                    for l in &body {
-                        match (&l.style, &l.target) {
-                            (Style::Region, _) => {
-                                if !first {
-                                    ui.dummy([0.0, gap]);
-                                }
-                                this.bold_text(ui, GOLD, &l.text);
-                                this.aside(ui, &l.aside, wrap);
-                            }
-                            (_, Some(t)) => {
-                                let selected = row == this.cursor;
-                                let targeted =
-                                    this.target.as_ref().is_some_and(|c| c.name == t.name);
-                                this.draw_row(
-                                    ui, t, &l.aside, player, selected, targeted, wrap, alpha,
-                                );
-                                if selected && scroll {
-                                    ui.set_scroll_here_y_with_ratio(0.5);
-                                }
-                                row += 1;
-                            }
-                            _ => {
-                                ui.indent();
-                                ui.text_colored(TEXT, &l.text);
-                                this.aside(ui, &l.aside, wrap);
-                                ui.unindent();
-                            }
-                        }
-                        first = false;
-                    }
-                });
-            }
-
-            ui.dummy([0.0, gap]);
-            ui.separator();
-            for l in &footer {
-                ui.text_colored(DIM, &l.text);
-                this.aside(ui, &l.aside, wrap);
-            }
-            ui.dummy([0.0, gap]);
-            let on_target = this
-                .targets()
-                .get(this.cursor)
-                .zip(this.target.as_ref())
-                .is_some_and(|(r, t)| r.name == t.name);
-            ui.text_colored(DIM, this.menu_hint(on_target));
-        });
+        let size = [
+            (font * 36.0).min(screen_w * 0.9),
+            (screen_h * 0.78)
+                .min(font * 40.0)
+                .max(font * 16.0)
+                .min(screen_h * 0.95),
+        ];
+        let _alpha = ui.push_style_var(StyleVar::Alpha(alpha));
+        let _border = ui.push_style_var(StyleVar::WindowBorderSize(1.0));
+        let _border_colour =
+            ui.push_style_color(StyleColor::Border, [GOLD[0], GOLD[1], GOLD[2], 0.45]);
+        let _padding = ui.push_style_var(StyleVar::WindowPadding([font * 1.2, font * 0.9]));
+        ui.window("##catchup-menu")
+            .position([screen_w / 2.0, screen_h / 2.0], Condition::Always)
+            .position_pivot([0.5, 0.5])
+            .size(size, Condition::Always)
+            .bg_alpha(0.94)
+            .flags(
+                WindowFlags::NO_DECORATION
+                    | WindowFlags::NO_INPUTS
+                    | WindowFlags::NO_NAV
+                    | WindowFlags::NO_SAVED_SETTINGS
+                    | WindowFlags::NO_FOCUS_ON_APPEARING,
+            )
+            .build(|| this.menu_contents(ui, scroll, alpha));
     }
 
-    /// One boss in the menu: highlighted under the cursor, marked if it's the compass target.
+    fn menu_contents(&self, ui: &Ui, scroll: bool, alpha: f32) {
+        let font = ui.current_font_size();
+        let line = ui.text_line_height_with_spacing();
+        let gap = font * 0.5;
+        let full_width = ui.content_region_avail()[0];
+        let now = local_now();
+
+        // Title row: "Catch-up" on the left, the player on the right.
+        self.title_text(ui, GOLD, "Catch-up");
+        if let Ok(c) = &self.data {
+            let who = format!(
+                "{}  ·  Lv {}  ·  {} bosses",
+                c.me.player,
+                c.me.level,
+                c.me.bosses.len()
+            );
+            self.right_aligned(ui, DIM, &who, full_width);
+        }
+        for p in &self.problems {
+            ui.text_colored(WARN, p);
+        }
+        let c = match &self.data {
+            Ok(c) => Some(c),
+            Err(e) => {
+                let message = if e.is_empty() {
+                    "Set repo = in catchup_overlay.ini"
+                } else {
+                    e.as_str()
+                };
+                ui.text_colored(WARN, message);
+                None
+            }
+        };
+        if let Some(c) = c.filter(|c| !c.others.is_empty()) {
+            let lines = view::lines(c, now);
+            if let Some(summary) = lines.iter().find(|l| l.style == Style::Summary) {
+                ui.text_colored(TEXT, &summary.text);
+            }
+            if let Some(l) = &c.leader {
+                self.right_aligned(
+                    ui,
+                    DIM,
+                    &format!("{} is furthest ahead", l.player),
+                    full_width,
+                );
+            }
+        }
+        self.rule(ui, alpha);
+
+        // The list, or an empty state.
+        let lines = c.map(|c| view::lines(c, now)).unwrap_or_default();
+        let body: Vec<_> = lines
+            .iter()
+            .filter(|l| matches!(l.style, Style::Region | Style::Item))
+            .collect();
+        let rows: Vec<(&Target, &str)> = body
+            .iter()
+            .filter_map(|l| l.target.as_ref().map(|t| (t, l.aside.as_str())))
+            .collect();
+        let footer_lines = if rows.is_empty() { 2.6 } else { 4.6 };
+        let list_height =
+            (ui.content_region_avail()[1] - footer_lines * line - gap).max(line * 3.0);
+        let player = self.player_position().ok().map(|(p, _)| p);
+        ui.child_window("##list")
+            .size([full_width, list_height])
+            .build(|| {
+                if body.is_empty() {
+                    let (heading, detail) = match c {
+                    Some(c) if c.others.is_empty() => (
+                        "Nothing to catch up on yet",
+                        "Bosses show up here once someone else in the group syncs their progress.",
+                    ),
+                    Some(_) => ("You're caught up", "You've beaten every boss the others have."),
+                    None => ("No progress loaded", "Check the repo path in catchup_overlay.ini."),
+                };
+                    let avail = ui.content_region_avail();
+                    ui.dummy([0.0, (avail[1] / 2.0 - line * 1.5).max(0.0)]);
+                    self.centered(ui, GOLD, heading, avail[0], true);
+                    self.centered(ui, DIM, detail, avail[0], false);
+                    return;
+                }
+                let width = ui.content_region_avail()[0];
+                let mut row = 0;
+                for (i, l) in body.iter().enumerate() {
+                    match (&l.style, &l.target) {
+                        (Style::Region, _) => {
+                            if i > 0 {
+                                ui.dummy([0.0, gap * 0.6]);
+                            }
+                            self.bold_text(ui, GOLD, &l.text);
+                            self.right_aligned(ui, DIM, &l.aside, width);
+                        }
+                        (_, Some(t)) => {
+                            let selected = row == self.cursor;
+                            let targeted = self.target.as_ref().is_some_and(|c| c.name == t.name);
+                            let distance = self.distance_to(player, t);
+                            self.draw_row(
+                                ui,
+                                &t.name,
+                                distance.as_deref(),
+                                selected,
+                                targeted,
+                                width,
+                                alpha,
+                            );
+                            if selected && scroll {
+                                ui.set_scroll_here_y_with_ratio(0.5);
+                            }
+                            row += 1;
+                        }
+                        _ => self.draw_row(ui, &l.text, Some(&l.aside), false, false, width, alpha),
+                    }
+                }
+            });
+        self.rule(ui, alpha);
+
+        // Details of the highlighted boss.
+        if let Some((t, who)) = rows.get(self.cursor) {
+            let targeted = self.target.as_ref().is_some_and(|c| c.name == t.name);
+            self.bold_text(ui, GOLD, &t.name);
+            if targeted {
+                self.right_aligned(ui, GOLD, "Compass target", full_width);
+            }
+            let distance = self
+                .distance_to(player, t)
+                .unwrap_or_else(|| "distance unknown".into());
+            ui.text_colored(
+                DIM,
+                format!("{}  ·  beaten by {who}  ·  {distance}", t.region),
+            );
+        }
+
+        // Who synced when, and the button prompts.
+        if let Some(c) = c {
+            let mut synced: Vec<String> = c
+                .others
+                .iter()
+                .map(|p| format!("{} {}", p.player, view::age_text(&p.save_modified, now)))
+                .collect();
+            synced.push(format!("you {}", view::age_text(&c.me.save_modified, now)));
+            ui.text_colored(DIM, format!("Last synced: {}", synced.join(", ")));
+        }
+        ui.dummy([0.0, gap * 0.4]);
+        let on_target = rows
+            .get(self.cursor)
+            .zip(self.target.as_ref())
+            .is_some_and(|((r, _), t)| r.name == t.name);
+        let pick = match (rows.is_empty(), on_target) {
+            (true, _) => None,
+            (false, true) => Some("Clear target"),
+            (false, false) => Some("Set target"),
+        };
+        self.draw_prompts(ui, &self.prompts(pick), full_width, alpha);
+    }
+
+    /// One line of the list: highlighted under the cursor, marked if it's the compass target,
+    /// with its value right-aligned.
     #[allow(clippy::too_many_arguments)]
     fn draw_row(
         &self,
         ui: &Ui,
-        target: &Target,
-        who: &str,
-        player: Option<(f32, f32)>,
+        text: &str,
+        value: Option<&str>,
         selected: bool,
         targeted: bool,
-        wrap: f32,
+        width: f32,
         alpha: f32,
     ) {
         let [x, y] = ui.cursor_screen_pos();
         let height = ui.text_line_height();
+        let gold = |a: f32| [GOLD[0], GOLD[1], GOLD[2], a * alpha];
         let draw = ui.get_window_draw_list();
         if selected {
-            let pad = height * 0.15;
+            let pad = height * 0.18;
             draw.add_rect(
                 [x - pad, y - pad],
-                [x + wrap, y + height + pad],
-                [GOLD[0], GOLD[1], GOLD[2], 0.18 * alpha],
+                [x + width, y + height + pad],
+                gold(0.16),
             )
             .filled(true)
-            .rounding(height * 0.2)
+            .rounding(height * 0.15)
+            .build();
+            draw.add_rect(
+                [x - pad, y - pad],
+                [x - pad + height * 0.12, y + height + pad],
+                gold(1.0),
+            )
+            .filled(true)
             .build();
         }
         if targeted {
-            // A small diamond in the indent, like a map marker.
-            let (cx, cy, r) = (x + height * 0.4, y + height * 0.5, height * 0.22);
-            let gold = [GOLD[0], GOLD[1], GOLD[2], alpha];
-            draw.add_triangle([cx, cy - r], [cx + r, cy], [cx - r, cy], gold)
+            // A small diamond, like a map marker.
+            let (cx, cy, r) = (x + height * 0.45, y + height * 0.5, height * 0.22);
+            draw.add_triangle([cx, cy - r], [cx + r, cy], [cx - r, cy], gold(1.0))
                 .filled(true)
                 .build();
-            draw.add_triangle([cx - r, cy], [cx + r, cy], [cx, cy + r], gold)
+            draw.add_triangle([cx - r, cy], [cx + r, cy], [cx, cy + r], gold(1.0))
                 .filled(true)
                 .build();
         }
         ui.indent();
-        ui.text_colored(if targeted || selected { GOLD } else { TEXT }, &target.name);
-        let aside = match self.distance_to(player, target) {
-            Some(d) => format!("{who} · {d}"),
-            None => who.to_string(),
-        };
-        self.aside(ui, &aside, wrap);
+        ui.text_colored(if selected || targeted { GOLD } else { TEXT }, text);
         ui.unindent();
+        if let Some(value) = value.filter(|v| !v.is_empty()) {
+            self.right_aligned(ui, DIM, value, width);
+        }
+    }
+
+    /// Text at the right edge of a `width`-wide area, on the current line if it fits.
+    fn right_aligned(&self, ui: &Ui, colour: [f32; 4], text: &str, width: f32) {
+        let text_width = ui.calc_text_size(text)[0];
+        ui.same_line();
+        let x = width - text_width;
+        if x > ui.cursor_pos()[0] {
+            ui.same_line_with_pos(x);
+        } else {
+            ui.new_line();
+        }
+        ui.text_colored(colour, text);
+    }
+
+    /// A line centered in a `width`-wide area.
+    fn centered(&self, ui: &Ui, colour: [f32; 4], text: &str, width: f32, bold: bool) {
+        let text_width = ui.calc_text_size(text)[0].min(width);
+        ui.set_cursor_pos([((width - text_width) / 2.0).max(0.0), ui.cursor_pos()[1]]);
+        if bold {
+            self.bold_text(ui, colour, text);
+        } else {
+            ui.text_colored(colour, text);
+        }
+    }
+
+    /// A thin gold line across the menu.
+    fn rule(&self, ui: &Ui, alpha: f32) {
+        let gap = ui.current_font_size() * 0.45;
+        ui.dummy([0.0, gap]);
+        let [x, y] = ui.cursor_screen_pos();
+        let width = ui.content_region_avail()[0];
+        ui.get_window_draw_list()
+            .add_line(
+                [x, y],
+                [x + width, y],
+                [GOLD[0], GOLD[1], GOLD[2], 0.4 * alpha],
+            )
+            .build();
+        ui.dummy([0.0, gap]);
+    }
+
+    /// Button prompts for the menu, named for the controller in use or the keyboard.
+    fn prompts(&self, pick: Option<&'static str>) -> Vec<(String, &'static str)> {
+        let mut out = Vec::new();
+        if self.pad.any_connected() {
+            let style = self.pad_style();
+            let name = |bit| settings::button_label(bit, style).to_string();
+            if let Some(pick) = pick {
+                out.push(("D-pad".to_string(), "Move"));
+                out.push((name(A), pick));
+            }
+            out.push((name(B), "Back"));
+        } else {
+            if let Some(pick) = pick {
+                out.push(("Arrows".to_string(), "Move"));
+                out.push(("Enter".to_string(), pick));
+            }
+            out.push(("Esc".to_string(), "Back"));
+        }
+        out
+    }
+
+    /// Prompts like "[A] Set target  [B] Back", right-aligned like the game's own menus.
+    fn draw_prompts(&self, ui: &Ui, prompts: &[(String, &str)], width: f32, alpha: f32) {
+        let font = ui.current_font_size();
+        let pad = [font * 0.4, font * 0.12];
+        let spacing = font * 0.35;
+        let between = font * 1.1;
+        let keys: Vec<f32> = prompts
+            .iter()
+            .map(|(key, _)| ui.calc_text_size(key)[0] + pad[0] * 2.0)
+            .collect();
+        let total: f32 = prompts
+            .iter()
+            .zip(&keys)
+            .map(|((_, action), key)| key + spacing + ui.calc_text_size(action)[0])
+            .sum::<f32>()
+            + between * prompts.len().saturating_sub(1) as f32;
+        let [cx, cy] = ui.cursor_pos();
+        ui.set_cursor_pos([cx + (width - total).max(0.0), cy]);
+        for (i, ((key, action), key_width)) in prompts.iter().zip(&keys).enumerate() {
+            if i > 0 {
+                ui.same_line_with_spacing(0.0, between);
+            }
+            let [x, y] = ui.cursor_screen_pos();
+            let (top, bottom) = (y - pad[1], y + ui.text_line_height() + pad[1]);
+            let draw = ui.get_window_draw_list();
+            draw.add_rect(
+                [x, top],
+                [x + key_width, bottom],
+                [GOLD[0], GOLD[1], GOLD[2], 0.15 * alpha],
+            )
+            .filled(true)
+            .rounding(font * 0.2)
+            .build();
+            draw.add_rect(
+                [x, top],
+                [x + key_width, bottom],
+                [GOLD[0], GOLD[1], GOLD[2], 0.6 * alpha],
+            )
+            .rounding(font * 0.2)
+            .build();
+            draw.add_text([x + pad[0], y], [TEXT[0], TEXT[1], TEXT[2], alpha], key);
+            ui.dummy([*key_width, ui.text_line_height()]);
+            ui.same_line_with_spacing(0.0, spacing);
+            ui.text_colored(TEXT, action);
+        }
     }
 
     /// The overlay's window in the configured corner.
@@ -817,13 +1049,23 @@ impl ImguiRenderLoop for Overlay {
                 }),
             }]),
         };
+        let mut next = 1;
         if let Ok(data) = fs::read(fonts.join("seguisb.ttf")) {
             ctx.fonts().add_font(&[FontSource::TtfData {
                 data: &data,
                 size_pixels: size,
+                config: Some(config.clone()),
+            }]);
+            self.bold_font = Some(next);
+            next += 1;
+        }
+        if let Ok(data) = fs::read(fonts.join("georgia.ttf")) {
+            ctx.fonts().add_font(&[FontSource::TtfData {
+                data: &data,
+                size_pixels: size * 1.6,
                 config: Some(config),
             }]);
-            self.has_bold = true;
+            self.title_font = Some(next);
         }
 
         let style = ctx.style_mut();
@@ -841,6 +1083,21 @@ impl ImguiRenderLoop for Overlay {
     }
 
     fn render(&mut self, ui: &mut Ui) {
+        // Show the hint on the first frame, and again on loading into the world, which is
+        // when the player is looking.
+        let in_world = game::snapshot().is_ok();
+        if !self.drawing {
+            let [w, h] = ui.io().display_size;
+            log(format!("First frame drawn ({w}x{h})"));
+        }
+        if in_world && !self.in_world {
+            log("Character loaded");
+        }
+        if !self.drawing || (in_world && !self.in_world) {
+            self.drawing = true;
+            self.hint_until = Instant::now() + HINT_FOR;
+        }
+        self.in_world = in_world;
         let input = self.read_input();
         self.reload_if_changed();
         self.handle(input);
@@ -883,6 +1140,10 @@ pub unsafe extern "system" fn DllMain(module: HINSTANCE, reason: u32, _: *mut c_
     if reason == DLL_PROCESS_ATTACH {
         let module = module.0 as usize;
         std::thread::spawn(move || {
+            log(format!(
+                "Loaded into {}",
+                std::env::current_exe().unwrap_or_default().display()
+            ));
             let overlay = Overlay::new();
             let combo = overlay.settings.combo;
             let hooked = Hudhook::builder()
@@ -890,13 +1151,28 @@ pub unsafe extern "system" fn DllMain(module: HINSTANCE, reason: u32, _: *mut c_
                 .with_hmodule(HINSTANCE(module as _))
                 .build()
                 .apply();
-            if hooked.is_err() {
+            if let Err(e) = hooked {
+                log(format!(
+                    "Couldn't hook DirectX 12 drawing: {e:?}. Unloading."
+                ));
                 hudhook::eject();
                 return;
             }
+            log("Hooked DirectX 12 drawing");
             pad::install(combo.into_iter().collect());
-            dinput::install();
+            log(format!(
+                "Controller combo hidden from the game: {}",
+                pad::masking()
+            ));
+            log(format!(
+                "Keyboard and mouse blocking hooked: {}",
+                dinput::install()
+            ));
             game::init();
+            log(match game::unavailable() {
+                None => "Compass ready".to_string(),
+                Some(why) => format!("Compass off: {why}"),
+            });
         });
     }
     1

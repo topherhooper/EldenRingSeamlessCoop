@@ -193,16 +193,20 @@ fn parse_iso(iso: &str) -> Option<i64> {
 
 /// "synced 3 h ago", or the date once it's a week old.
 fn synced_text(iso: &str, now: Option<i64>) -> String {
+    format!("synced {}", age_text(iso, now))
+}
+
+/// "3 h ago", or the date once it's a week old.
+pub fn age_text(iso: &str, now: Option<i64>) -> String {
     let ago = now.zip(parse_iso(iso)).map(|(now, then)| now - then);
-    let text = match ago {
+    match ago {
         Some(s) if (0..60).contains(&s) => "just now".to_string(),
         Some(s) if (0..3600).contains(&s) => format!("{} min ago", s / 60),
         Some(s) if (0..86400).contains(&s) => format!("{} h ago", s / 3600),
         Some(s) if (0..86400 * 2).contains(&s) => "yesterday".to_string(),
         Some(s) if (0..86400 * 7).contains(&s) => format!("{} days ago", s / 86400),
         _ => when_text(iso),
-    };
-    format!("synced {text}")
+    }
 }
 
 #[cfg(test)]

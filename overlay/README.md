@@ -11,7 +11,7 @@ It's optional and local: other players don't need it, and it doesn't change anyt
 
 ## Using it
 
-Press **F9**, or on a controller **hold Y and press View** (Triangle and Create on a PlayStation controller), to open the menu.
+Press **F9**, or on a controller **hold Y and press View** (Triangle and Create on a PlayStation controller), to open the menu. It opens in the middle of the screen over the dimmed game. With nothing to catch up on, for example before anyone else has synced, it says so and only offers Back.
 
 | In the menu | Keyboard | Controller |
 |---|---|---|
@@ -136,6 +136,16 @@ On first start, the overlay creates `catchup_overlay.ini` next to the DLL and sh
 | `opacity` | `0.75` | Background opacity, from `0.2` (see-through) to `1` (solid). |
 | `font_size` | `0` | Text height in pixels. `0` scales with the game's resolution. |
 | `compass_debug` | `0` | `1` shows map and coordinates under the compass. |
+
+## Troubleshooting
+
+The overlay writes `catchup_overlay.log` next to the DLL each time the game starts. The log records:
+- whether it hooked the game's drawing and input
+- whether the compass can work with this game version
+- each time it loads progress
+- the first frame it drew
+
+If nothing shows up, press F9 first: with no compass target, the overlay only shows a short hint at start and when you load in. If F9 does nothing either, the log says how far the overlay got.
 
 ## Keeping it current
 
