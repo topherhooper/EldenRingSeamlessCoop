@@ -1,0 +1,4236 @@
+{
+ "source": "https://github.com/ClayAmore/ER-Save-Editor (MIT/Apache-2.0), base game only",
+ "bosses": [
+  {
+   "region": "Limgrave",
+   "flag": 1036500800,
+   "name": "Alabaster Lord (Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 31030800,
+   "name": "Beastman of Faram Azula (Groveside Cave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1042380850,
+   "name": "Bell Bearing Hunter (Warmaster's Shack)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 30110800,
+   "name": "Black Knife Assassin (Deathtouched Catacombs)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1044350800,
+   "name": "Bloodhound Knight Darriwil (Forlorn Hound Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1042370800,
+   "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1042380800,
+   "name": "Deathbird (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 31150800,
+   "name": "Demi-Human Chiefs (Coastal Cave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 30020800,
+   "name": "Erdtree Burial Watchdog (Stormfront Catacombs)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1043360800,
+   "name": "Flying Dragon Agheel (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 10000800,
+   "name": "Godrick the Grafted"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 10010800,
+   "name": "Grafted Scion (Chapel of Anticipation)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 30040800,
+   "name": "Grave Warden Duelist (Murkwater Catacombs)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 31170800,
+   "name": "Guardian Golem (Highroad Cave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1044360800,
+   "name": "Mad Pumpkin Head (Waypoint Ruins)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 10000850,
+   "name": "Margit the Fell Omen"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1043370800,
+   "name": "Night's Cavalry (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 31000800,
+   "name": "Patches (Murkwater Cave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 18000850,
+   "name": "Soldier of Godrick"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 32010800,
+   "name": "Stonedigger Troll (Limgrave Tunnels)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1045390800,
+   "name": "Tibia Mariner (Summonwater Village)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 1042360800,
+   "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 1042330800,
+   "name": "Ancient Hero of Zamor (Weeping Evergaol)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 30000800,
+   "name": "Cemetery Shade (Tombsward Catacombs)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 1044320800,
+   "name": "Deathbird (Weeping Peninsula)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 30010800,
+   "name": "Edtree Burial Watchdog (Impaler's Catacombs)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 1043330800,
+   "name": "Erdtree Avatar"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 1043300800,
+   "name": "Leonine Misbegotten (Morne Moangrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 31020800,
+   "name": "Miranda the Blighted Bloom (Tombsward Cave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 1044320850,
+   "name": "Night's Cavalry (Weeping Peninsula)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 31010800,
+   "name": "Runebear (Earthbore Cave)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1038410800,
+   "name": "Adan, Thief of Fire (Malefactor's Evergaol)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1033420800,
+   "name": "Alecto, Black Knife Ringleader (Ringleader's Evergaol)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1037460800,
+   "name": "Bell Bearing Hunter (Church of Vows)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 30050850,
+   "name": "Black Knife Assassin (Black Knife Catacombs)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 31050800,
+   "name": "Bloodhound Knight (Lakeside Crystal Cave)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1033450800,
+   "name": "Bols, Carian Knight (Cuckoo's Evergaol)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 30050800,
+   "name": "Cemetery Shade (Black Knife Catacombs)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 31040800,
+   "name": "Cleanrot Knight (Stillwater Cave)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 32020800,
+   "name": "Crystalian (Raya Lucaria Crystal Tunnel)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 31060800,
+   "name": "Crystalian Spear Crystalian Staff (Academy Crystal Cave)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1037420800,
+   "name": "Deathbird (Liurnia South)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1036450800,
+   "name": "Death Rite Bird (Liurnia North)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1038480800,
+   "name": "Erdtree Avatar (Liurnia Northeast)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1033430800,
+   "name": "Erdtree Avatar (Liurnia Southwest)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 30060800,
+   "name": "Erdtree Burial Watchdog (Cliffbottom Catacombs)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1034500800,
+   "name": "Glintstone Dragon Adula (Moonlight Altar)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1034450800,
+   "name": "Glintstone Dragon Smarag (Liurnia)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1036480800,
+   "name": "Night's Cavalry (Liurnia North)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1039430800,
+   "name": "Night's Cavalry (Liurnia South)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1035420800,
+   "name": "Omenkiller (Village of the Albinaurics)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1036500800,
+   "name": "Onyx Lord (Royal Grave Evergaol)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1035500800,
+   "name": "Royal Knight Loretta (Caria Manor)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 1034480800,
+   "name": "Royal Revenant (Kingsrealm Ruins)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 30030800,
+   "name": "Spiritcaller Snail (Road's End Catacombs)"
+  },
+  {
+   "region": "Academya of Raya Lucaria",
+   "flag": 14000800,
+   "name": "Rennala, Queen of the Full Moon"
+  },
+  {
+   "region": "Academya of Raya Lucaria",
+   "flag": 14000850,
+   "name": "Red Wolf of Radagon (Raya Lucaria)"
+  },
+  {
+   "region": "Ruin-Strewn Precipice",
+   "flag": 39200800,
+   "name": "Magma Wyrm Makar (Ruin-Strewn Precipice)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1049380800,
+   "name": "Commander O'Neil (Swamp of Aeonia)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1051360800,
+   "name": "Crucible Knight. Misbegotten Warrior (Redmane Castle) "
+  },
+  {
+   "region": "Caelid",
+   "flag": 1049370850,
+   "name": "Death Rite Bird (Caelid)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1048370800,
+   "name": "Decaying Ekzykes (Caelid)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1050400800,
+   "name": "Elder Dragon Greyoll"
+  },
+  {
+   "region": "Caelid",
+   "flag": 30140800,
+   "name": "Erdtree Burial Watchdogs (Minor Erdtree Catacombs)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 32080800,
+   "name": "Fallingstar Beast (Sellia Crystal Tunnel)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 31210800,
+   "name": "Frenzied Duelist (Gaol Cave)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1048400800,
+   "name": "Mad Pumpkin Heads (Caelem Ruins)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 32070800,
+   "name": "Magma Wyrm (Gael Tunnel)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1049370800,
+   "name": "Night's Cavalry (Caelid)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1049390800,
+   "name": "Nox Swordstress and Nox Priest (Sellia, Town of Sorcery)"
+  },
+  {
+   "region": "Caelid",
+   "flag": 1047400800,
+   "name": "Putrid Avatar (Caelid)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1049390850,
+   "name": "Battlemage Hugues (Sellia Evergaol)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 31100800,
+   "name": "Beastmen of Faram Azula (Dragonbarrow Cave)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1048410800,
+   "name": "Bell Bearing Hunter (Isolated Merchant's Shack)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1051430800,
+   "name": "Black Blade Kindred (Bestial Sanctum)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1052410800,
+   "name": "Flying Dragon Greyll (Greyoll's Dragonbarrow)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 34130800,
+   "name": "Godskin Apostle (Divine Tower of Caelid)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1052410850,
+   "name": "Night's Cavalry (Dragonbarrow)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 1052560800,
+   "name": "Putrid Avatar (Dragonbarrow)"
+  },
+  {
+   "region": "Dragonbarrow",
+   "flag": 31110800,
+   "name": "Putrid Crystalians (Sellia Hideaway)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1041520800,
+   "name": "Ancient Dragon Lansseax (Altus Plateau)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 30080800,
+   "name": "Ancient Hero of Zamor (Sainted Hero's Grave)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 31190800,
+   "name": "Black Knife Assassin (Sage's Cave)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1040520800,
+   "name": "Black Knife Assassin (Sainted Hero's Grave)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 32050800,
+   "name": "Crystalian Spear and Crystalian Ringblade (Altus Tunnel)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1038510800,
+   "name": "Demi-Human Queen Gilika (Lux Ruins)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1039540800,
+   "name": "Elemer of the Briar (The Shaded Castle)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 30070800,
+   "name": "Erdtree Burial Watchdog (Wyndham Catacombs)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1041500800,
+   "name": "Fallingstar Beast (Altus Plateau)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1039500800,
+   "name": "Godefroy the Grafted (Golden Lineage Evergaol)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1042550800,
+   "name": "Godskin Apostle (Dominula, Windmill Village)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 31190850,
+   "name": "Necromancer Garris (Sage's Cave)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1039510800,
+   "name": "Night's Cavalry (Altus Plateau)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 31180800,
+   "name": "Omenkiller and Miranda the Blighted Bloom (Perfumer's Grotto)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 30120800,
+   "name": "Perfumer Tricia and Misbegotten Warrior (Unsightly Catacombs)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1040530800,
+   "name": "Sanguine Noble (Writheblood Ruins)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 32040800,
+   "name": "Stonedigger Troll (Old Altus Tunnel)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1038520800,
+   "name": "Tibia Mariner (Wyndham Ruins)"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 1041510800,
+   "name": "Tree Sentinels (Altus Plateau)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 1043530800,
+   "name": "Bell Bearing Hunter (Hermit Merchant's Shack)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 30100800,
+   "name": "Crucible Knight, Crucible Knight Ordovis (Auriza Hero Grave)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 1042380850,
+   "name": "Deathbird (Warmaster's Shack)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 1045520800,
+   "name": "Draconic Tree Sentinel (Capital Outskirts)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 34140850,
+   "name": "Fell Twins (Divine Tower of East Altus)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 30130800,
+   "name": "Grave Warden Duelist (Auriza Side Tomb)"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 11000850,
+   "name": "Godfrey, First Elden Lord (Golden Shade)"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 35000800,
+   "name": "Mohg, the Omen (Cathedral of the Forsaken)"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 11000800,
+   "name": "Morgott, the Omen King"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 16000860,
+   "name": "Abductor Virgins (Mt. Gelmir)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 1037530800,
+   "name": "Demi-Human Queen Maggie (Hermit Village)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 31090800,
+   "name": "Demi-Human Queen Margot (Volano Cave)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 1036540800,
+   "name": "Full-Grown Fallingstar Beast (Ninth Mt. Gelmir Campsite)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 16000800,
+   "name": "God-Devouring Serpent / Rykard, Lord of Blasphemy"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 16000850,
+   "name": "Godskin Noble (Temple of Eiglay)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 31070800,
+   "name": "Kindred of Rot (Seethewater Cave)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 1035530800,
+   "name": "Magma Wyrm (Mt. Gelmir)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 30090800,
+   "name": "Red Wolf of the Champion (Gelmir Hero's Grave)"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 1037540810,
+   "name": "Ulcerated Tree Spirit (Mt. Gelmir)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 30170800,
+   "name": "Ancient Hero of Zamor (Giant-Conquring Hero's Grave)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1054560800,
+   "name": "Borealis the Freezing Fog (Freezing Lake)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1051570800,
+   "name": "Commander Niall (Castle Sol)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1050570800,
+   "name": "Death Rite Bird (Mountaintops of the Giants)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1050570800,
+   "name": "Erdtree Avatar (Mountaintops of the Giants)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1052520800,
+   "name": "Fire Giant"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 31220800,
+   "name": "Godskin Apostle and Godskin Noble  (Spiritcaller Cave) Spiritcaller Snail"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 30180800,
+   "name": "Ulcerated Tree Spirit (Giants' Mountaintop Catacombs)"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 1053560800,
+   "name": "Vyke, Knight of the Roundtable (Lord Contender's Evergaol)"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 13000830,
+   "name": "Dragonlord Placidusax"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 13000850,
+   "name": "Godskin Duo"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 13000800,
+   "name": "Malekith, the Black Blade"
+  },
+  {
+   "region": "Forbidden Lands",
+   "flag": 1049520800,
+   "name": "Black Blade Kindred (Forbidden Lands)"
+  },
+  {
+   "region": "Forbidden Lands",
+   "flag": 1048510800,
+   "name": "Night's Cavalry (Forbidden Lands)"
+  },
+  {
+   "region": "Forbidden Lands",
+   "flag": 30200800,
+   "name": "Stray Mimic Tear (Hidden Path to the Haligtree)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 32110800,
+   "name": "Astel, Stars of Darkness (Yelough Anix Tunnel)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 1048570800,
+   "name": "Death Rite Bird (Consecrated Snowfield)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 1050560800,
+   "name": "Great Wyrm Theodorix (Consecrated Snowfield)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 31120800,
+   "name": "Misbegotten Crusader (Cave of the Forlorn)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 1248550800,
+   "name": "Night's Cavalry Duo (Consecrated Snowfield)"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 1050570850,
+   "name": "Putrid Avatar"
+  },
+  {
+   "region": "Consecrated Snowfields",
+   "flag": 30190800,
+   "name": "Putrid Grave Warden Duelist (Consecrated Snowfield Catacombs)"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 15000850,
+   "name": "Loretta, Knight of the Haligtree"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 15000800,
+   "name": "Malenia, Goddess of Rot"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 12080800,
+   "name": "Ancestor Spirit (Siofra River Bank)"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 12020830,
+   "name": "Dragonkin Soldier (Siofra River Bank)"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 12050800,
+   "name": "Mohg, Lord of Blood"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 12010800,
+   "name": "Dragonkin Soldier of Nokstella (Ainsel River)"
+  },
+  {
+   "region": "Nokron Eternal City",
+   "flag": 12020850,
+   "name": "Mimic Tear (Nokron, Eternal City)"
+  },
+  {
+   "region": "Nokron Eternal City",
+   "flag": 12090800,
+   "name": "Regal Ancestor Spirit (Ancestral Woods)"
+  },
+  {
+   "region": "Nokron Eternal City",
+   "flag": 12020800,
+   "name": "Valiant Gargoyles (Siofra Aqueduct)"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 12030390,
+   "name": "Crucible Knight Siluria"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 12030800,
+   "name": "Fia's Champions"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 12030850,
+   "name": "Lichdragon Fortissax"
+  },
+  {
+   "region": "Lake of Rot",
+   "flag": 12040800,
+   "name": "Astel, Naturalborn of the Void"
+  },
+  {
+   "region": "Lake of Rot",
+   "flag": 12010850,
+   "name": "Dragonkin Soldier (Lake of Rot)"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 11050800,
+   "name": "Godfrey, First Elden Lord (Hoarah Loux)"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 11050850,
+   "name": "Sir Gideon Ofnir, the All-Knowing"
+  },
+  {
+   "region": "Elden Throne",
+   "flag": 19000810,
+   "name": "Radagon of the Golden Order / Elden Beast"
+  }
+ ],
+ "graces": [
+  {
+   "region": "Table of Lost Grace / Roundtable Hold",
+   "flag": 71190,
+   "name": "Table of Lost Grace / Roundtable Hold"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76108,
+   "name": "Agheel Lake North"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76106,
+   "name": "Agheel Lake South"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76110,
+   "name": "Church of Dragon Communion"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76100,
+   "name": "Church of Elleh"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73115,
+   "name": "Coastal Cave"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76105,
+   "name": "Fort Haight West"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76111,
+   "name": "Gatefront"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73103,
+   "name": "Groveside Cave"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73117,
+   "name": "Highroad Cave"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76103,
+   "name": "Artist's Shack (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73201,
+   "name": "Limgrave Tunnels"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76114,
+   "name": "Mistwood Outskirts"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73004,
+   "name": "Murkwater Catacombs"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73100,
+   "name": "Murkwater Cave"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76116,
+   "name": "Murkwater Coast"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76113,
+   "name": "Seaside Ruins"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 73002,
+   "name": "Stormfoot Catacombs"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76119,
+   "name": "Summonwater Village Outskirts"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76101,
+   "name": "The First Step"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76104,
+   "name": "Third Church of Marika"
+  },
+  {
+   "region": "Limgrave",
+   "flag": 76120,
+   "name": "Waypoint Ruins Cellar"
+  },
+  {
+   "region": "Stranded Graveyard",
+   "flag": 71800,
+   "name": "Cave of Knowledge"
+  },
+  {
+   "region": "Stranded Graveyard",
+   "flag": 71801,
+   "name": "Stranded Graveyard"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 71002,
+   "name": "Castleward Tunnel"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 73011,
+   "name": "Deathtouched Catacombs"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 73412,
+   "name": "Divine Tower of Limgrave"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 73410,
+   "name": "Limgrave Tower Bridge"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 71001,
+   "name": "Margit, the Fell Omen"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 76117,
+   "name": "Saintsbridge"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 76102,
+   "name": "Stormhill Shack"
+  },
+  {
+   "region": "Stormhill",
+   "flag": 76118,
+   "name": "Warmaster's Shack"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76154,
+   "name": "Ailing Village Outskirts"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76159,
+   "name": "Behind The Castle"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76155,
+   "name": "Beside the Crater-Pocked Glade"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76160,
+   "name": "Beside the Rampart Gaol"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76157,
+   "name": "Bridge of Sacrifice"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76158,
+   "name": "Castle Morne Lift"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76151,
+   "name": "Castle Morne Rampart"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76150,
+   "name": "Church of Pilgrimage"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 73101,
+   "name": "Earthbore Cave"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76162,
+   "name": "Fourth Church of Marika"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 73001,
+   "name": "Impaler's Catacombs"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76156,
+   "name": "Isolated Merchant's Shack (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76161,
+   "name": "Morne Moangrave"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 73200,
+   "name": "Morne Tunnel"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76153,
+   "name": "South of the Lookout Tower"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 76152,
+   "name": "Tombsward"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 73000,
+   "name": "Tombsward Catacombs"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "flag": 73102,
+   "name": "Tombsward Cave"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71003,
+   "name": "Gateside Chamber"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71000,
+   "name": "Godrick the Grafted"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71006,
+   "name": "Liftside Chamber"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71005,
+   "name": "Rampart Tower"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71007,
+   "name": "Secluded Cell"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71004,
+   "name": "Stormveil Cliffside"
+  },
+  {
+   "region": "Stormveil Castle",
+   "flag": 71008,
+   "name": "Stormveil Main Gate"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73106,
+   "name": "Academy Crystal Cave"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76204,
+   "name": "Academy Gate Town"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76238,
+   "name": "Behind Caria Manor"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73005,
+   "name": "Black Knife Catacombs"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76216,
+   "name": "Boilprawn Shack"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76224,
+   "name": "Church of Vows"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73006,
+   "name": "Cliffbottom Catacombs"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76237,
+   "name": "Converted Tower"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76243,
+   "name": "Crystalline Woods"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73422,
+   "name": "Divine Tower of Liurnia"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76223,
+   "name": "Eastern Liurnia Lake Shore"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76234,
+   "name": "Eastern Tableland"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76242,
+   "name": "East Gate Bridge Trestle"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76236,
+   "name": "Fallen Ruins of the Lake"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76219,
+   "name": "Folly on the Lake"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76210,
+   "name": "Foot of the Four Belfries"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76222,
+   "name": "Gate Town Bridge"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76233,
+   "name": "Gate Town North"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76245,
+   "name": "Jarburg"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76200,
+   "name": "Lake-Facing Cliffs"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73105,
+   "name": "Lakeside Crystal Cave"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76202,
+   "name": "Laskyar Ruins"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76221,
+   "name": "Liurnia Highway North"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76244,
+   "name": "Liurnia Highway South"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76201,
+   "name": "Liurnia Lake Shore"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76217,
+   "name": "Artist's Shack (Liurnia of the Lakes)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73421,
+   "name": "Liurnia Tower Bridge"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76206,
+   "name": "Main Academy Gate"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76214,
+   "name": "Main Caria Manor Gate"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76231,
+   "name": "Manor Lower Level"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76230,
+   "name": "Manor Upper Level"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76226,
+   "name": "Mausoleum Compound"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76212,
+   "name": "Northern Liurnia Lake Shore"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76247,
+   "name": "Ranni's Chamber"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76228,
+   "name": "Ranni's Rise"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76229,
+   "name": "Ravine-Veiled Village"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73202,
+   "name": "Raya Lucaria Crystal Tunnel"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76218,
+   "name": "Revenger's Shack"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73003,
+   "name": "Road's End Catacombs"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76213,
+   "name": "Road to the Manor"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76232,
+   "name": "Royal Moongazing Grounds"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76225,
+   "name": "Ruined Labyrinth"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76203,
+   "name": "Scenic Isle"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76215,
+   "name": "Slumbering Wolf's Shack"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76211,
+   "name": "Sorcerer's Isle"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76205,
+   "name": "South Raya Lucaria Gate"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73104,
+   "name": "Stillwater Cave"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 73420,
+   "name": "Study Hall Entrance"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76241,
+   "name": "Temple Quarter"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76227,
+   "name": "The Four Belfries"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76235,
+   "name": "The Ravine"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "flag": 76220,
+   "name": "Village of the Albinaurics"
+  },
+  {
+   "region": "Bellum Highway",
+   "flag": 76208,
+   "name": "Bellum Church"
+  },
+  {
+   "region": "Bellum Highway",
+   "flag": 76240,
+   "name": "Church of Inhibition"
+  },
+  {
+   "region": "Bellum Highway",
+   "flag": 76207,
+   "name": "East Raya Lucaria Gate"
+  },
+  {
+   "region": "Bellum Highway",
+   "flag": 76239,
+   "name": "Frenzied Flame Village Outskirts"
+  },
+  {
+   "region": "Bellum Highway",
+   "flag": 76209,
+   "name": "Grand Lift of Dectus"
+  },
+  {
+   "region": "Ruin-Strewn Precipice",
+   "flag": 73900,
+   "name": "Magma Wyrm"
+  },
+  {
+   "region": "Ruin-Strewn Precipice",
+   "flag": 73901,
+   "name": "Ruin-Strewn Precipice"
+  },
+  {
+   "region": "Ruin-Strewn Precipice",
+   "flag": 73902,
+   "name": "Ruin-Strewn Precipice Overlook"
+  },
+  {
+   "region": "Moonlight Altar",
+   "flag": 76252,
+   "name": "Altar South"
+  },
+  {
+   "region": "Moonlight Altar",
+   "flag": 76251,
+   "name": "Cathedral of Manus Celes"
+  },
+  {
+   "region": "Moonlight Altar",
+   "flag": 76250,
+   "name": "Moonlight Altar"
+  },
+  {
+   "region": "Academy of Raya Lucaria",
+   "flag": 71402,
+   "name": "Church of the Cuckoo"
+  },
+  {
+   "region": "Academy of Raya Lucaria",
+   "flag": 71401,
+   "name": "Debate Parlour"
+  },
+  {
+   "region": "Academy of Raya Lucaria",
+   "flag": 71400,
+   "name": "Raya Lucaria Grand Library"
+  },
+  {
+   "region": "Academy of Raya Lucaria",
+   "flag": 71403,
+   "name": "Schoolhouse Classroom"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76300,
+   "name": "Abandoned Coffin"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76303,
+   "name": "Altus Highway Junction"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76301,
+   "name": "Altus Plateau"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73205,
+   "name": "Altus Tunnel"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76306,
+   "name": "Bower of Bounty"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76322,
+   "name": "Castellan's Hall"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76302,
+   "name": "Erdtree-Gazing Hill"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76304,
+   "name": "Forest-Spanning Greatbridge"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73204,
+   "name": "Old Altus Tunnel"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73118,
+   "name": "Perfumer's Grotto"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76305,
+   "name": "Rampartside Path"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76307,
+   "name": "Road of Iniquity Side Path"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73119,
+   "name": "Sage's Cave"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73008,
+   "name": "Sainted Hero's Grave"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76321,
+   "name": "Shaded Castle Inner Gate"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76320,
+   "name": "Shaded Castle Ramparts"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 73012,
+   "name": "Unsightly Catacombs"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76313,
+   "name": "Windmill Heights"
+  },
+  {
+   "region": "Altus Plateau",
+   "flag": 76308,
+   "name": "Windmill Village"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76350,
+   "name": "Bridge of Iniquity"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76356,
+   "name": "Craftsman's Shack"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76351,
+   "name": "First Mt. Gelmir Campsite"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 73009,
+   "name": "Gelmir Hero's Grave"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76352,
+   "name": "Ninth Mt. Gelmir Campsite"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76357,
+   "name": "Primeval Sorcerer Azur"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76353,
+   "name": "Road of Iniquity"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 73107,
+   "name": "Seethewater Cave"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76354,
+   "name": "Seethewater River"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 76355,
+   "name": "Seethewater Terminus"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 73109,
+   "name": "Volcano Cave"
+  },
+  {
+   "region": "Mt. Gelmir",
+   "flag": 73007,
+   "name": "Wyndham Catacombs"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 73013,
+   "name": "Auriza Side Tomb"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 73010,
+   "name": "Auzira Hero's Grave"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 76314,
+   "name": "Capital Rampart"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 73430,
+   "name": "Divine Tower of West Altus"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 73432,
+   "name": "Divine Tower of West Altus: Gate"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 76311,
+   "name": "Hermit Merchant's Shack"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 76310,
+   "name": "Minor Eerdtree Church"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 76312,
+   "name": "Outer Wall Battleground"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 76309,
+   "name": "Outer Wall Phantom Tree"
+  },
+  {
+   "region": "Capital Outskirts",
+   "flag": 73431,
+   "name": "Sealed Tunnel"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71606,
+   "name": "Abductor Virgin"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71605,
+   "name": "Audience Pathway"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71604,
+   "name": "Guest Hall"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71603,
+   "name": "Prison Town Church"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71600,
+   "name": "Rykard, Lord of Blasphemy"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71607,
+   "name": "Subterranean Inquisition Chamber"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71601,
+   "name": "Temple of Eiglay"
+  },
+  {
+   "region": "Volcano Manor",
+   "flag": 71602,
+   "name": "Volcano Manor"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71104,
+   "name": "Avenue Balcony"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71109,
+   "name": "Divine Bridge"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71102,
+   "name": "East Capital Rampart"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71100,
+   "name": "Elden Throne"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71101,
+   "name": "Erdtree Sanctuary"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71108,
+   "name": "Fortified Manor, First Floor"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71103,
+   "name": "Lower Capital Church"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71107,
+   "name": "Queen's Bedchamber"
+  },
+  {
+   "region": "Leyndell, Royal Capital",
+   "flag": 71105,
+   "name": "West Capital Rampart"
+  },
+  {
+   "region": "Subterranean Shunning-Grounds",
+   "flag": 73500,
+   "name": "Cathedral of the Forsaken"
+  },
+  {
+   "region": "Subterranean Shunning-Grounds",
+   "flag": 73502,
+   "name": "Forsaken Depths"
+  },
+  {
+   "region": "Subterranean Shunning-Grounds",
+   "flag": 73504,
+   "name": "Frenzied Flame Proscription"
+  },
+  {
+   "region": "Subterranean Shunning-Grounds",
+   "flag": 73503,
+   "name": "Leyndell Catacombs"
+  },
+  {
+   "region": "Subterranean Shunning-Grounds",
+   "flag": 73501,
+   "name": "Underground Roadside"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71123,
+   "name": "Leyendell, Capital of Ash"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71125,
+   "name": "Divine Bridge"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71122,
+   "name": "East Capital Rampart"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71120,
+   "name": "Elden Throne"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71121,
+   "name": "Erdtree Sanctuary"
+  },
+  {
+   "region": "Leyndell, Ashen Capital",
+   "flag": 71124,
+   "name": "Queen's Bedchamber"
+  },
+  {
+   "region": "Stone Platfrom",
+   "flag": 71900,
+   "name": "Fractured Marika"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73120,
+   "name": "Abandoned Cave"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76403,
+   "name": "Caelem Ruins"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73015,
+   "name": "Caelid Catacombs"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76405,
+   "name": "Caelid Highway South"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76404,
+   "name": "Cathedral of Dragon Communion"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76415,
+   "name": "Chair-Crypt of Sellia"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76420,
+   "name": "Chamber Outside the Plaza"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76418,
+   "name": "Church of the Plague"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76410,
+   "name": "Deep Siofra Well"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76402,
+   "name": "Fort Gael North"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73207,
+   "name": "Gael Tunnel"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73121,
+   "name": "Gaol Cave"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76417,
+   "name": "Impassable Greatbridge"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73014,
+   "name": "Minor Eerdtree Catacombs"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73257,
+   "name": "Rear Gael Tunnel Entrance"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76419,
+   "name": "Redmane Castle Plaza"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76401,
+   "name": "Rotview Balcony"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76414,
+   "name": "Sellia Backstreets"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73208,
+   "name": "Sellia Crystal Tunnel"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76416,
+   "name": "Sellia Under-Stair"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76400,
+   "name": "Smoldering Church"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76409,
+   "name": "Smoldering Wall"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76411,
+   "name": "Southern Aeonia Swamp Bank"
+  },
+  {
+   "region": "Caelid",
+   "flag": 76422,
+   "name": "Starscourge Radahn"
+  },
+  {
+   "region": "Caelid",
+   "flag": 73016,
+   "name": "War-Dead Catacombs"
+  },
+  {
+   "region": "Swamp of Aeonia",
+   "flag": 76406,
+   "name": "Aeonia Swamp Shore"
+  },
+  {
+   "region": "Swamp of Aeonia",
+   "flag": 76407,
+   "name": "Astray from Caelid Highway North"
+  },
+  {
+   "region": "Swamp of Aeonia",
+   "flag": 76412,
+   "name": "Heart of Aeonia"
+  },
+  {
+   "region": "Swamp of Aeonia",
+   "flag": 76413,
+   "name": "Inner Aeonia"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76454,
+   "name": "Bestial Sanctum"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 73440,
+   "name": "Divine Tower of Caelid: Basement"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 73441,
+   "name": "Divine Tower of Caelid: Center"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 73110,
+   "name": "Dragonbarrow Cave"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76452,
+   "name": "Dragonbarrow Fork"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76450,
+   "name": "Dragonbarrow West"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76456,
+   "name": "Farum Greatbridge"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76453,
+   "name": "Fort Faroth"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76451,
+   "name": "Isolated Merchant's Shack (Greyoll's Dragonbarrow)"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 73460,
+   "name": "Isolated Divine Tower"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 76455,
+   "name": "Lenne's Rise"
+  },
+  {
+   "region": "Greyoll's Dragonbarrow",
+   "flag": 73111,
+   "name": "Sellia Hideaway"
+  },
+  {
+   "region": "Forbiden Lands",
+   "flag": 73451,
+   "name": "Divine Tower of the East Altus"
+  },
+  {
+   "region": "Forbiden Lands",
+   "flag": 73450,
+   "name": "Divine Tower of the East Altus: Gate"
+  },
+  {
+   "region": "Forbiden Lands",
+   "flag": 76500,
+   "name": "Forbidden Lands"
+  },
+  {
+   "region": "Forbiden Lands",
+   "flag": 76502,
+   "name": "Grand Lift of Rold"
+  },
+  {
+   "region": "Forbiden Lands",
+   "flag": 73020,
+   "name": "Hidden Path to the Haligtree"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76503,
+   "name": "Ancient Snow Valley Ruins"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76522,
+   "name": "Castle Sol Main Gate"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76524,
+   "name": "Castle Sol Rooftop"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76523,
+   "name": "Church of the Eclipse"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76505,
+   "name": "First Church of Marika"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76504,
+   "name": "Freezing Lake"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76521,
+   "name": "Snow Valley Ruins Overlook"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 73122,
+   "name": "Spiritcaller's Cave"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76520,
+   "name": "Whiteridge Road"
+  },
+  {
+   "region": "Mountaintops of the Giants",
+   "flag": 76501,
+   "name": "Zamor Ruins"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 76507,
+   "name": "Church of Repose"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 76509,
+   "name": "Fire Giant"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 76508,
+   "name": "Foot of the Forge"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 76510,
+   "name": "Forge of the Giants"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 73017,
+   "name": "Giant-Conquering Hero's Grave"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 76506,
+   "name": "Giant's Gravepost"
+  },
+  {
+   "region": "Flame Peak",
+   "flag": 73018,
+   "name": "Giant's Mountaintop Catacombs"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 76653,
+   "name": "Apostate Derelict"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 73112,
+   "name": "Cave of the Forlorn"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 76550,
+   "name": "Consecrated Snowfield"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 73019,
+   "name": "Consecrated Snowfield Catacombs"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 76551,
+   "name": "Inner Consecrated Snowfield"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 76652,
+   "name": "Ordina, Liturgical Town"
+  },
+  {
+   "region": "Consecrated Snowfield",
+   "flag": 73211,
+   "name": "Yelough Anix Tunnel"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 71506,
+   "name": "Haligtree Canopy"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 71505,
+   "name": "Haligtree Promenade"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 71507,
+   "name": "Haligtree Town"
+  },
+  {
+   "region": "Miquella's Haligtree",
+   "flag": 71508,
+   "name": "Haligtree Town Plaza"
+  },
+  {
+   "region": "Elphael, Brace of the Haligtree",
+   "flag": 71503,
+   "name": "Drainage Channel"
+  },
+  {
+   "region": "Elphael, Brace of the Haligtree",
+   "flag": 71502,
+   "name": "Elphael Inner Wall"
+  },
+  {
+   "region": "Elphael, Brace of the Haligtree",
+   "flag": 71504,
+   "name": "Haligtree Roots"
+  },
+  {
+   "region": "Elphael, Brace of the Haligtree",
+   "flag": 71500,
+   "name": "Malenia, Godess of Rot"
+  },
+  {
+   "region": "Elphael, Brace of the Haligtree",
+   "flag": 71501,
+   "name": "Prayer Room"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71310,
+   "name": "Beside the great Bridge"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71303,
+   "name": "Crumbling Beast Grave"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71304,
+   "name": "Crumbling Beast Grave Depths"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71301,
+   "name": "Dragonlord Placidusax"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71306,
+   "name": "Dragon Temple"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71302,
+   "name": "Dragon Temple Altar"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71308,
+   "name": "Dragon Temple Lift"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71309,
+   "name": "Dragon Temple Rooftop"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71307,
+   "name": "Dragon Temple Transept"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71300,
+   "name": "Maliketh, the Black Blade"
+  },
+  {
+   "region": "Crumbling Farum Azula",
+   "flag": 71305,
+   "name": "Tempest-Facing Balcony"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 71213,
+   "name": "Ainsel River Downstream"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 71212,
+   "name": "Ainsel River Sluice Gate"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 71211,
+   "name": "Ainsel River Well Depths"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 71240,
+   "name": "Astel, Naturalborn of the Void"
+  },
+  {
+   "region": "Ainsel River",
+   "flag": 71210,
+   "name": "Dragonkin Soldier of Nokstella"
+  },
+  {
+   "region": "Ainsel River Main",
+   "flag": 71214,
+   "name": "Ainsel River Main"
+  },
+  {
+   "region": "Ainsel River Main",
+   "flag": 71215,
+   "name": "Nokstella, Eternal City"
+  },
+  {
+   "region": "Ainsel River Main",
+   "flag": 71219,
+   "name": "Nokstella Waterfall Basin"
+  },
+  {
+   "region": "Lake Of Rot",
+   "flag": 71218,
+   "name": "Grand Cloister"
+  },
+  {
+   "region": "Lake Of Rot",
+   "flag": 71216,
+   "name": "Lake of Rot Shoreside"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71224,
+   "name": "Ancestral Woods"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71225,
+   "name": "Aqueduct-Facing Cliffs"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71220,
+   "name": "Great Waterfall Basin"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71221,
+   "name": "Mimic Tear"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71226,
+   "name": "Night's Sacred Ground"
+  },
+  {
+   "region": "Nokron, Eternal City",
+   "flag": 71271,
+   "name": "Nokron, Eternal City"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 71227,
+   "name": "Below the Well"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 71222,
+   "name": "Siofra River Bank"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 71270,
+   "name": "Siofra River Well Depths"
+  },
+  {
+   "region": "Siofra River",
+   "flag": 71223,
+   "name": "Worshippers' Woods"
+  },
+  {
+   "region": "Mohgwyn Palace",
+   "flag": 71250,
+   "name": "Cocoon of the Empyrean"
+  },
+  {
+   "region": "Mohgwyn Palace",
+   "flag": 71252,
+   "name": "Dynasty Mausoleum Entrance"
+  },
+  {
+   "region": "Mohgwyn Palace",
+   "flag": 71253,
+   "name": "Dynasty Mausoleum Midpoint"
+  },
+  {
+   "region": "Mohgwyn Palace",
+   "flag": 71251,
+   "name": "Palace Approach Ledge-Road"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71235,
+   "name": "Across the Roots"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71233,
+   "name": "Deeproot Depths"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71232,
+   "name": "Great Waterfall Crest"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71230,
+   "name": "Prince of Death's Throne"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71231,
+   "name": "Root-Facing Cliffs"
+  },
+  {
+   "region": "Deeproot Depths",
+   "flag": 71234,
+   "name": "The Nameless Eternal City"
+  }
+ ],
+ "flag_offsets": {
+  "71000": [
+   2625,
+   7
+  ],
+  "71001": [
+   2625,
+   6
+  ],
+  "71002": [
+   2625,
+   5
+  ],
+  "71003": [
+   2625,
+   4
+  ],
+  "71004": [
+   2625,
+   3
+  ],
+  "71005": [
+   2625,
+   2
+  ],
+  "71006": [
+   2625,
+   1
+  ],
+  "71007": [
+   2625,
+   0
+  ],
+  "71008": [
+   2626,
+   7
+  ],
+  "71100": [
+   2637,
+   3
+  ],
+  "71101": [
+   2637,
+   2
+  ],
+  "71102": [
+   2637,
+   1
+  ],
+  "71103": [
+   2637,
+   0
+  ],
+  "71104": [
+   2638,
+   7
+  ],
+  "71105": [
+   2638,
+   6
+  ],
+  "71107": [
+   2638,
+   4
+  ],
+  "71108": [
+   2638,
+   3
+  ],
+  "71109": [
+   2638,
+   2
+  ],
+  "71120": [
+   2640,
+   7
+  ],
+  "71121": [
+   2640,
+   6
+  ],
+  "71122": [
+   2640,
+   5
+  ],
+  "71123": [
+   2640,
+   4
+  ],
+  "71124": [
+   2640,
+   3
+  ],
+  "71125": [
+   2640,
+   2
+  ],
+  "71190": [
+   2648,
+   1
+  ],
+  "71210": [
+   2651,
+   5
+  ],
+  "71211": [
+   2651,
+   4
+  ],
+  "71212": [
+   2651,
+   3
+  ],
+  "71213": [
+   2651,
+   2
+  ],
+  "71214": [
+   2651,
+   1
+  ],
+  "71215": [
+   2651,
+   0
+  ],
+  "71216": [
+   2652,
+   7
+  ],
+  "71218": [
+   2652,
+   5
+  ],
+  "71219": [
+   2652,
+   4
+  ],
+  "71220": [
+   2652,
+   3
+  ],
+  "71221": [
+   2652,
+   2
+  ],
+  "71222": [
+   2652,
+   1
+  ],
+  "71223": [
+   2652,
+   0
+  ],
+  "71224": [
+   2653,
+   7
+  ],
+  "71225": [
+   2653,
+   6
+  ],
+  "71226": [
+   2653,
+   5
+  ],
+  "71227": [
+   2653,
+   4
+  ],
+  "71230": [
+   2653,
+   1
+  ],
+  "71231": [
+   2653,
+   0
+  ],
+  "71232": [
+   2654,
+   7
+  ],
+  "71233": [
+   2654,
+   6
+  ],
+  "71234": [
+   2654,
+   5
+  ],
+  "71235": [
+   2654,
+   4
+  ],
+  "71240": [
+   2655,
+   7
+  ],
+  "71250": [
+   2656,
+   5
+  ],
+  "71251": [
+   2656,
+   4
+  ],
+  "71252": [
+   2656,
+   3
+  ],
+  "71253": [
+   2656,
+   2
+  ],
+  "71270": [
+   2658,
+   1
+  ],
+  "71271": [
+   2658,
+   0
+  ],
+  "71300": [
+   2662,
+   3
+  ],
+  "71301": [
+   2662,
+   2
+  ],
+  "71302": [
+   2662,
+   1
+  ],
+  "71303": [
+   2662,
+   0
+  ],
+  "71304": [
+   2663,
+   7
+  ],
+  "71305": [
+   2663,
+   6
+  ],
+  "71306": [
+   2663,
+   5
+  ],
+  "71307": [
+   2663,
+   4
+  ],
+  "71308": [
+   2663,
+   3
+  ],
+  "71309": [
+   2663,
+   2
+  ],
+  "71310": [
+   2663,
+   1
+  ],
+  "71400": [
+   2675,
+   7
+  ],
+  "71401": [
+   2675,
+   6
+  ],
+  "71402": [
+   2675,
+   5
+  ],
+  "71403": [
+   2675,
+   4
+  ],
+  "71500": [
+   2687,
+   3
+  ],
+  "71501": [
+   2687,
+   2
+  ],
+  "71502": [
+   2687,
+   1
+  ],
+  "71503": [
+   2687,
+   0
+  ],
+  "71504": [
+   2688,
+   7
+  ],
+  "71505": [
+   2688,
+   6
+  ],
+  "71506": [
+   2688,
+   5
+  ],
+  "71507": [
+   2688,
+   4
+  ],
+  "71508": [
+   2688,
+   3
+  ],
+  "71600": [
+   2700,
+   7
+  ],
+  "71601": [
+   2700,
+   6
+  ],
+  "71602": [
+   2700,
+   5
+  ],
+  "71603": [
+   2700,
+   4
+  ],
+  "71604": [
+   2700,
+   3
+  ],
+  "71605": [
+   2700,
+   2
+  ],
+  "71606": [
+   2700,
+   1
+  ],
+  "71607": [
+   2700,
+   0
+  ],
+  "71800": [
+   2725,
+   7
+  ],
+  "71801": [
+   2725,
+   6
+  ],
+  "71900": [
+   2737,
+   3
+  ],
+  "73000": [
+   2875,
+   7
+  ],
+  "73001": [
+   2875,
+   6
+  ],
+  "73002": [
+   2875,
+   5
+  ],
+  "73003": [
+   2875,
+   4
+  ],
+  "73004": [
+   2875,
+   3
+  ],
+  "73005": [
+   2875,
+   2
+  ],
+  "73006": [
+   2875,
+   1
+  ],
+  "73007": [
+   2875,
+   0
+  ],
+  "73008": [
+   2876,
+   7
+  ],
+  "73009": [
+   2876,
+   6
+  ],
+  "73010": [
+   2876,
+   5
+  ],
+  "73011": [
+   2876,
+   4
+  ],
+  "73012": [
+   2876,
+   3
+  ],
+  "73013": [
+   2876,
+   2
+  ],
+  "73014": [
+   2876,
+   1
+  ],
+  "73015": [
+   2876,
+   0
+  ],
+  "73016": [
+   2877,
+   7
+  ],
+  "73017": [
+   2877,
+   6
+  ],
+  "73018": [
+   2877,
+   5
+  ],
+  "73019": [
+   2877,
+   4
+  ],
+  "73020": [
+   2877,
+   3
+  ],
+  "73100": [
+   2887,
+   3
+  ],
+  "73101": [
+   2887,
+   2
+  ],
+  "73102": [
+   2887,
+   1
+  ],
+  "73103": [
+   2887,
+   0
+  ],
+  "73104": [
+   2888,
+   7
+  ],
+  "73105": [
+   2888,
+   6
+  ],
+  "73106": [
+   2888,
+   5
+  ],
+  "73107": [
+   2888,
+   4
+  ],
+  "73109": [
+   2888,
+   2
+  ],
+  "73110": [
+   2888,
+   1
+  ],
+  "73111": [
+   2888,
+   0
+  ],
+  "73112": [
+   2889,
+   7
+  ],
+  "73115": [
+   2889,
+   4
+  ],
+  "73117": [
+   2889,
+   2
+  ],
+  "73118": [
+   2889,
+   1
+  ],
+  "73119": [
+   2889,
+   0
+  ],
+  "73120": [
+   2890,
+   7
+  ],
+  "73121": [
+   2890,
+   6
+  ],
+  "73122": [
+   2890,
+   5
+  ],
+  "73200": [
+   2900,
+   7
+  ],
+  "73201": [
+   2900,
+   6
+  ],
+  "73202": [
+   2900,
+   5
+  ],
+  "73204": [
+   2900,
+   3
+  ],
+  "73205": [
+   2900,
+   2
+  ],
+  "73207": [
+   2900,
+   0
+  ],
+  "73208": [
+   2901,
+   7
+  ],
+  "73211": [
+   2901,
+   4
+  ],
+  "73257": [
+   2907,
+   6
+  ],
+  "73410": [
+   2926,
+   5
+  ],
+  "73412": [
+   2926,
+   3
+  ],
+  "73420": [
+   2927,
+   3
+  ],
+  "73421": [
+   2927,
+   2
+  ],
+  "73422": [
+   2927,
+   1
+  ],
+  "73430": [
+   2928,
+   1
+  ],
+  "73431": [
+   2928,
+   0
+  ],
+  "73432": [
+   2929,
+   7
+  ],
+  "73440": [
+   2930,
+   7
+  ],
+  "73441": [
+   2930,
+   6
+  ],
+  "73450": [
+   2931,
+   5
+  ],
+  "73451": [
+   2931,
+   4
+  ],
+  "73460": [
+   2932,
+   3
+  ],
+  "73500": [
+   2937,
+   3
+  ],
+  "73501": [
+   2937,
+   2
+  ],
+  "73502": [
+   2937,
+   1
+  ],
+  "73503": [
+   2937,
+   0
+  ],
+  "73504": [
+   2938,
+   7
+  ],
+  "73900": [
+   2987,
+   3
+  ],
+  "73901": [
+   2987,
+   2
+  ],
+  "73902": [
+   2987,
+   1
+  ],
+  "76100": [
+   3262,
+   3
+  ],
+  "76101": [
+   3262,
+   2
+  ],
+  "76102": [
+   3262,
+   1
+  ],
+  "76103": [
+   3262,
+   0
+  ],
+  "76104": [
+   3263,
+   7
+  ],
+  "76105": [
+   3263,
+   6
+  ],
+  "76106": [
+   3263,
+   5
+  ],
+  "76108": [
+   3263,
+   3
+  ],
+  "76110": [
+   3263,
+   1
+  ],
+  "76111": [
+   3263,
+   0
+  ],
+  "76113": [
+   3264,
+   6
+  ],
+  "76114": [
+   3264,
+   5
+  ],
+  "76116": [
+   3264,
+   3
+  ],
+  "76117": [
+   3264,
+   2
+  ],
+  "76118": [
+   3264,
+   1
+  ],
+  "76119": [
+   3264,
+   0
+  ],
+  "76120": [
+   3265,
+   7
+  ],
+  "76150": [
+   3268,
+   1
+  ],
+  "76151": [
+   3268,
+   0
+  ],
+  "76152": [
+   3269,
+   7
+  ],
+  "76153": [
+   3269,
+   6
+  ],
+  "76154": [
+   3269,
+   5
+  ],
+  "76155": [
+   3269,
+   4
+  ],
+  "76156": [
+   3269,
+   3
+  ],
+  "76157": [
+   3269,
+   2
+  ],
+  "76158": [
+   3269,
+   1
+  ],
+  "76159": [
+   3269,
+   0
+  ],
+  "76160": [
+   3270,
+   7
+  ],
+  "76161": [
+   3270,
+   6
+  ],
+  "76162": [
+   3270,
+   5
+  ],
+  "76200": [
+   3275,
+   7
+  ],
+  "76201": [
+   3275,
+   6
+  ],
+  "76202": [
+   3275,
+   5
+  ],
+  "76203": [
+   3275,
+   4
+  ],
+  "76204": [
+   3275,
+   3
+  ],
+  "76205": [
+   3275,
+   2
+  ],
+  "76206": [
+   3275,
+   1
+  ],
+  "76207": [
+   3275,
+   0
+  ],
+  "76208": [
+   3276,
+   7
+  ],
+  "76209": [
+   3276,
+   6
+  ],
+  "76210": [
+   3276,
+   5
+  ],
+  "76211": [
+   3276,
+   4
+  ],
+  "76212": [
+   3276,
+   3
+  ],
+  "76213": [
+   3276,
+   2
+  ],
+  "76214": [
+   3276,
+   1
+  ],
+  "76215": [
+   3276,
+   0
+  ],
+  "76216": [
+   3277,
+   7
+  ],
+  "76217": [
+   3277,
+   6
+  ],
+  "76218": [
+   3277,
+   5
+  ],
+  "76219": [
+   3277,
+   4
+  ],
+  "76220": [
+   3277,
+   3
+  ],
+  "76221": [
+   3277,
+   2
+  ],
+  "76222": [
+   3277,
+   1
+  ],
+  "76223": [
+   3277,
+   0
+  ],
+  "76224": [
+   3278,
+   7
+  ],
+  "76225": [
+   3278,
+   6
+  ],
+  "76226": [
+   3278,
+   5
+  ],
+  "76227": [
+   3278,
+   4
+  ],
+  "76228": [
+   3278,
+   3
+  ],
+  "76229": [
+   3278,
+   2
+  ],
+  "76230": [
+   3278,
+   1
+  ],
+  "76231": [
+   3278,
+   0
+  ],
+  "76232": [
+   3279,
+   7
+  ],
+  "76233": [
+   3279,
+   6
+  ],
+  "76234": [
+   3279,
+   5
+  ],
+  "76235": [
+   3279,
+   4
+  ],
+  "76236": [
+   3279,
+   3
+  ],
+  "76237": [
+   3279,
+   2
+  ],
+  "76238": [
+   3279,
+   1
+  ],
+  "76239": [
+   3279,
+   0
+  ],
+  "76240": [
+   3280,
+   7
+  ],
+  "76241": [
+   3280,
+   6
+  ],
+  "76242": [
+   3280,
+   5
+  ],
+  "76243": [
+   3280,
+   4
+  ],
+  "76244": [
+   3280,
+   3
+  ],
+  "76245": [
+   3280,
+   2
+  ],
+  "76247": [
+   3280,
+   0
+  ],
+  "76250": [
+   3281,
+   5
+  ],
+  "76251": [
+   3281,
+   4
+  ],
+  "76252": [
+   3281,
+   3
+  ],
+  "76300": [
+   3287,
+   3
+  ],
+  "76301": [
+   3287,
+   2
+  ],
+  "76302": [
+   3287,
+   1
+  ],
+  "76303": [
+   3287,
+   0
+  ],
+  "76304": [
+   3288,
+   7
+  ],
+  "76305": [
+   3288,
+   6
+  ],
+  "76306": [
+   3288,
+   5
+  ],
+  "76307": [
+   3288,
+   4
+  ],
+  "76308": [
+   3288,
+   3
+  ],
+  "76309": [
+   3288,
+   2
+  ],
+  "76310": [
+   3288,
+   1
+  ],
+  "76311": [
+   3288,
+   0
+  ],
+  "76312": [
+   3289,
+   7
+  ],
+  "76313": [
+   3289,
+   6
+  ],
+  "76314": [
+   3289,
+   5
+  ],
+  "76320": [
+   3290,
+   7
+  ],
+  "76321": [
+   3290,
+   6
+  ],
+  "76322": [
+   3290,
+   5
+  ],
+  "76350": [
+   3293,
+   1
+  ],
+  "76351": [
+   3293,
+   0
+  ],
+  "76352": [
+   3294,
+   7
+  ],
+  "76353": [
+   3294,
+   6
+  ],
+  "76354": [
+   3294,
+   5
+  ],
+  "76355": [
+   3294,
+   4
+  ],
+  "76356": [
+   3294,
+   3
+  ],
+  "76357": [
+   3294,
+   2
+  ],
+  "76400": [
+   3300,
+   7
+  ],
+  "76401": [
+   3300,
+   6
+  ],
+  "76402": [
+   3300,
+   5
+  ],
+  "76403": [
+   3300,
+   4
+  ],
+  "76404": [
+   3300,
+   3
+  ],
+  "76405": [
+   3300,
+   2
+  ],
+  "76406": [
+   3300,
+   1
+  ],
+  "76407": [
+   3300,
+   0
+  ],
+  "76409": [
+   3301,
+   6
+  ],
+  "76410": [
+   3301,
+   5
+  ],
+  "76411": [
+   3301,
+   4
+  ],
+  "76412": [
+   3301,
+   3
+  ],
+  "76413": [
+   3301,
+   2
+  ],
+  "76414": [
+   3301,
+   1
+  ],
+  "76415": [
+   3301,
+   0
+  ],
+  "76416": [
+   3302,
+   7
+  ],
+  "76417": [
+   3302,
+   6
+  ],
+  "76418": [
+   3302,
+   5
+  ],
+  "76419": [
+   3302,
+   4
+  ],
+  "76420": [
+   3302,
+   3
+  ],
+  "76422": [
+   3302,
+   1
+  ],
+  "76450": [
+   3306,
+   5
+  ],
+  "76451": [
+   3306,
+   4
+  ],
+  "76452": [
+   3306,
+   3
+  ],
+  "76453": [
+   3306,
+   2
+  ],
+  "76454": [
+   3306,
+   1
+  ],
+  "76455": [
+   3306,
+   0
+  ],
+  "76456": [
+   3307,
+   7
+  ],
+  "76500": [
+   3312,
+   3
+  ],
+  "76501": [
+   3312,
+   2
+  ],
+  "76502": [
+   3312,
+   1
+  ],
+  "76503": [
+   3312,
+   0
+  ],
+  "76504": [
+   3313,
+   7
+  ],
+  "76505": [
+   3313,
+   6
+  ],
+  "76506": [
+   3313,
+   5
+  ],
+  "76507": [
+   3313,
+   4
+  ],
+  "76508": [
+   3313,
+   3
+  ],
+  "76509": [
+   3313,
+   2
+  ],
+  "76510": [
+   3313,
+   1
+  ],
+  "76520": [
+   3315,
+   7
+  ],
+  "76521": [
+   3315,
+   6
+  ],
+  "76522": [
+   3315,
+   5
+  ],
+  "76523": [
+   3315,
+   4
+  ],
+  "76524": [
+   3315,
+   3
+  ],
+  "76550": [
+   3318,
+   1
+  ],
+  "76551": [
+   3318,
+   0
+  ],
+  "76652": [
+   3331,
+   3
+  ],
+  "76653": [
+   3331,
+   2
+  ],
+  "10000800": [
+   1383475,
+   7
+  ],
+  "10000850": [
+   1383481,
+   5
+  ],
+  "10010800": [
+   1384600,
+   7
+  ],
+  "11000800": [
+   1387975,
+   7
+  ],
+  "11000850": [
+   1387981,
+   5
+  ],
+  "11050800": [
+   1389100,
+   7
+  ],
+  "11050850": [
+   1389106,
+   5
+  ],
+  "12010800": [
+   1395850,
+   7
+  ],
+  "12010850": [
+   1395856,
+   5
+  ],
+  "12020800": [
+   1396975,
+   7
+  ],
+  "12020830": [
+   1396978,
+   1
+  ],
+  "12020850": [
+   1396981,
+   5
+  ],
+  "12030390": [
+   1398048,
+   1
+  ],
+  "12030800": [
+   1398100,
+   7
+  ],
+  "12030850": [
+   1398106,
+   5
+  ],
+  "12040800": [
+   1399225,
+   7
+  ],
+  "12050800": [
+   1400350,
+   7
+  ],
+  "12080800": [
+   1403725,
+   7
+  ],
+  "12090800": [
+   1404850,
+   7
+  ],
+  "13000800": [
+   1405975,
+   7
+  ],
+  "13000830": [
+   1405978,
+   1
+  ],
+  "13000850": [
+   1405981,
+   5
+  ],
+  "14000800": [
+   1409350,
+   7
+  ],
+  "14000850": [
+   1409356,
+   5
+  ],
+  "15000800": [
+   1412725,
+   7
+  ],
+  "15000850": [
+   1412731,
+   5
+  ],
+  "16000800": [
+   1416100,
+   7
+  ],
+  "16000850": [
+   1416106,
+   5
+  ],
+  "16000860": [
+   1416107,
+   3
+  ],
+  "18000850": [
+   1422856,
+   5
+  ],
+  "19000810": [
+   1426226,
+   5
+  ],
+  "30000800": [
+   1473475,
+   7
+  ],
+  "30010800": [
+   1474600,
+   7
+  ],
+  "30020800": [
+   1475725,
+   7
+  ],
+  "30030800": [
+   1476850,
+   7
+  ],
+  "30040800": [
+   1477975,
+   7
+  ],
+  "30050800": [
+   1479100,
+   7
+  ],
+  "30050850": [
+   1479106,
+   5
+  ],
+  "30060800": [
+   1480225,
+   7
+  ],
+  "30070800": [
+   1481350,
+   7
+  ],
+  "30080800": [
+   1482475,
+   7
+  ],
+  "30090800": [
+   1483600,
+   7
+  ],
+  "30100800": [
+   1484725,
+   7
+  ],
+  "30110800": [
+   1485850,
+   7
+  ],
+  "30120800": [
+   1486975,
+   7
+  ],
+  "30130800": [
+   1488100,
+   7
+  ],
+  "30140800": [
+   1489225,
+   7
+  ],
+  "30170800": [
+   1492600,
+   7
+  ],
+  "30180800": [
+   1493725,
+   7
+  ],
+  "30190800": [
+   1494850,
+   7
+  ],
+  "30200800": [
+   1495975,
+   7
+  ],
+  "31000800": [
+   1507225,
+   7
+  ],
+  "31010800": [
+   1508350,
+   7
+  ],
+  "31020800": [
+   1509475,
+   7
+  ],
+  "31030800": [
+   1510600,
+   7
+  ],
+  "31040800": [
+   1511725,
+   7
+  ],
+  "31050800": [
+   1512850,
+   7
+  ],
+  "31060800": [
+   1513975,
+   7
+  ],
+  "31070800": [
+   1515100,
+   7
+  ],
+  "31090800": [
+   1517350,
+   7
+  ],
+  "31100800": [
+   1518475,
+   7
+  ],
+  "31110800": [
+   1519600,
+   7
+  ],
+  "31120800": [
+   1520725,
+   7
+  ],
+  "31150800": [
+   1524100,
+   7
+  ],
+  "31170800": [
+   1525225,
+   7
+  ],
+  "31180800": [
+   1526350,
+   7
+  ],
+  "31190800": [
+   1527475,
+   7
+  ],
+  "31190850": [
+   1527481,
+   5
+  ],
+  "31210800": [
+   1529725,
+   7
+  ],
+  "31220800": [
+   1530850,
+   7
+  ],
+  "32010800": [
+   1542100,
+   7
+  ],
+  "32020800": [
+   1543225,
+   7
+  ],
+  "32040800": [
+   1544350,
+   7
+  ],
+  "32050800": [
+   1546600,
+   7
+  ],
+  "32070800": [
+   1547725,
+   7
+  ],
+  "32080800": [
+   1548850,
+   7
+  ],
+  "32110800": [
+   1549975,
+   7
+  ],
+  "34130800": [
+   1454350,
+   7
+  ],
+  "34140850": [
+   1455481,
+   5
+  ],
+  "35000800": [
+   1429600,
+   7
+  ],
+  "39200800": [
+   1432975,
+   7
+  ],
+  "1033420800": [
+   347475,
+   7
+  ],
+  "1033430800": [
+   348350,
+   7
+  ],
+  "1033450800": [
+   350100,
+   7
+  ],
+  "1034450800": [
+   385100,
+   7
+  ],
+  "1034480800": [
+   387725,
+   7
+  ],
+  "1034500800": [
+   389475,
+   7
+  ],
+  "1035420800": [
+   417475,
+   7
+  ],
+  "1035500800": [
+   424475,
+   7
+  ],
+  "1035530800": [
+   427100,
+   7
+  ],
+  "1036450800": [
+   455100,
+   7
+  ],
+  "1036480800": [
+   457725,
+   7
+  ],
+  "1036500800": [
+   459475,
+   7
+  ],
+  "1036540800": [
+   462975,
+   7
+  ],
+  "1037420800": [
+   487475,
+   7
+  ],
+  "1037460800": [
+   490975,
+   7
+  ],
+  "1037530800": [
+   497100,
+   7
+  ],
+  "1037540810": [
+   497976,
+   5
+  ],
+  "1038410800": [
+   521600,
+   7
+  ],
+  "1038480800": [
+   527725,
+   7
+  ],
+  "1038510800": [
+   530350,
+   7
+  ],
+  "1038520800": [
+   531225,
+   7
+  ],
+  "1039430800": [
+   558350,
+   7
+  ],
+  "1039500800": [
+   564475,
+   7
+  ],
+  "1039510800": [
+   565350,
+   7
+  ],
+  "1039540800": [
+   567975,
+   7
+  ],
+  "1040520800": [
+   601225,
+   7
+  ],
+  "1040530800": [
+   602100,
+   7
+  ],
+  "1041500800": [
+   634475,
+   7
+  ],
+  "1041510800": [
+   635350,
+   7
+  ],
+  "1041520800": [
+   636225,
+   7
+  ],
+  "1042330800": [
+   654600,
+   7
+  ],
+  "1042360800": [
+   657225,
+   7
+  ],
+  "1042370800": [
+   658100,
+   7
+  ],
+  "1042380800": [
+   658975,
+   7
+  ],
+  "1042380850": [
+   658981,
+   5
+  ],
+  "1042550800": [
+   673850,
+   7
+  ],
+  "1043300800": [
+   686975,
+   7
+  ],
+  "1043330800": [
+   689600,
+   7
+  ],
+  "1043360800": [
+   692225,
+   7
+  ],
+  "1043370800": [
+   693100,
+   7
+  ],
+  "1043530800": [
+   707100,
+   7
+  ],
+  "1044320800": [
+   723725,
+   7
+  ],
+  "1044320850": [
+   723731,
+   5
+  ],
+  "1044350800": [
+   726350,
+   7
+  ],
+  "1044360800": [
+   727225,
+   7
+  ],
+  "1045390800": [
+   764850,
+   7
+  ],
+  "1045520800": [
+   776225,
+   7
+  ],
+  "1047400800": [
+   835725,
+   7
+  ],
+  "1048370800": [
+   868100,
+   7
+  ],
+  "1048400800": [
+   870725,
+   7
+  ],
+  "1048410800": [
+   871600,
+   7
+  ],
+  "1048510800": [
+   880350,
+   7
+  ],
+  "1048570800": [
+   885600,
+   7
+  ],
+  "1049370800": [
+   903100,
+   7
+  ],
+  "1049370850": [
+   903106,
+   5
+  ],
+  "1049380800": [
+   903975,
+   7
+  ],
+  "1049390800": [
+   904850,
+   7
+  ],
+  "1049390850": [
+   904856,
+   5
+  ],
+  "1049520800": [
+   916225,
+   7
+  ],
+  "1050400800": [
+   940725,
+   7
+  ],
+  "1050560800": [
+   954725,
+   7
+  ],
+  "1050570800": [
+   955600,
+   7
+  ],
+  "1050570850": [
+   955606,
+   5
+  ],
+  "1051360800": [
+   972225,
+   7
+  ],
+  "1051430800": [
+   978350,
+   7
+  ],
+  "1051570800": [
+   990600,
+   7
+  ],
+  "1052410800": [
+   1011600,
+   7
+  ],
+  "1052410850": [
+   1011606,
+   5
+  ],
+  "1052520800": [
+   1021225,
+   7
+  ],
+  "1052560800": [
+   1024725,
+   7
+  ],
+  "1053560800": [
+   1059725,
+   7
+  ],
+  "1054560800": [
+   1094725,
+   7
+  ],
+  "1248550800": [
+   1752475,
+   7
+  ]
+ }
+}
