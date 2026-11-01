@@ -2,7 +2,7 @@
 
 Goal: an in-game overlay that lists the bosses and regions the others have done that I haven't, the same thing `PROGRESS.md`'s "Catch-up" section shows, so I can catch up without alt-tabbing. Later, possibly a live pointer to the next target.
 
-**Status:** v1 is built. See [overlay/README.md](../overlay/README.md).
+**Status:** v1 and most of v2 are built. During play the overlay shows a compass pointing at a boss you pick; the catch-up list moved into a menu. Not yet built: crossing off your own bosses live. See [overlay/README.md](../overlay/README.md).
 
 Short answer: v1, a toggleable list, is feasible and low risk, and it doesn't need to read game memory at all. A pointer is realistic for overworld bosses, roughly, using only data we already have. Dungeon bosses and exact positions need more data work.
 

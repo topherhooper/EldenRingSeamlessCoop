@@ -12,6 +12,12 @@ crate-type = ["cdylib", "rlib"]
 hudhook = { version = "0.9.3", default-features = false, features = ["dx12"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+# Game structures (player position, camera, params) for the compass. Pinned to a commit that
+# supports game version 2.7.2.0; the crates.io release only supports 2.6.2.0.
+eldenring = { git = "https://github.com/vswarte/fromsoftware-rs", rev = "57023153d786c4b13fe95d9170e6dcd9d35093ea" }
+fromsoftware-shared = { git = "https://github.com/vswarte/fromsoftware-rs", rev = "57023153d786c4b13fe95d9170e6dcd9d35093ea" }
+# Same windows crate as hudhook; this adds the file-version API for the game version check.
+windows = { version = "0.62", features = ["Win32_Storage_FileSystem"] }
 
 [profile.release]
 opt-level = 3

@@ -14,6 +14,9 @@ use serde::Deserialize;
 pub struct Boss {
     pub name: String,
     pub region: String,
+    /// Kill flag. Only er_tables.json has it; progress files don't.
+    #[serde(default)]
+    pub flag: Option<u32>,
 }
 
 #[derive(Deserialize, Clone, Debug)]
@@ -40,6 +43,7 @@ struct RepoConfig {
 pub struct Order {
     boss: HashMap<String, usize>,
     region: HashMap<String, usize>,
+    flag: HashMap<String, u32>,
 }
 
 impl Order {
@@ -47,6 +51,9 @@ impl Order {
         let mut order = Order::default();
         for (i, b) in bosses.iter().enumerate() {
             order.boss.entry(b.name.clone()).or_insert(i);
+            if let Some(flag) = b.flag {
+                order.flag.entry(b.name.clone()).or_insert(flag);
+            }
             let next = order.region.len();
             order.region.entry(b.region.clone()).or_insert(next);
         }
@@ -67,6 +74,8 @@ pub struct MissingBoss {
     pub name: String,
     pub region: String,
     pub beaten_by: Vec<String>,
+    /// Kill flag, which says where the boss is (see `compass::boss_map`).
+    pub flag: Option<u32>,
 }
 
 #[derive(Debug, PartialEq)]
@@ -123,16 +132,25 @@ pub fn compute(me: &str, mut players: Vec<Player>, order: &Order) -> Result<Catc
     let mut grouped: BTreeMap<(usize, String), Vec<MissingBoss>> = BTreeMap::new();
     for (name, who) in beaten_by {
         let region = region_of[name];
-        grouped.entry((order.region(region), region.to_string())).or_default().push(MissingBoss {
-            name: name.to_string(),
-            region: region.to_string(),
-            beaten_by: who,
-        });
+        grouped
+            .entry((order.region(region), region.to_string()))
+            .or_default()
+            .push(MissingBoss {
+                name: name.to_string(),
+                region: region.to_string(),
+                beaten_by: who,
+                flag: order.flag.get(name).copied(),
+            });
     }
     let bosses = grouped
         .into_iter()
         .map(|((_, region), mut list)| {
-            list.sort_by(|a, b| order.boss(&a.name).cmp(&order.boss(&b.name)).then(a.name.cmp(&b.name)));
+            list.sort_by(|a, b| {
+                order
+                    .boss(&a.name)
+                    .cmp(&order.boss(&b.name))
+                    .then(a.name.cmp(&b.name))
+            });
             (region, list)
         })
         .collect();
@@ -143,7 +161,10 @@ pub fn compute(me: &str, mut players: Vec<Player>, order: &Order) -> Result<Catc
         for r in o.regions.iter().filter(|r| !reached.contains(r.as_str())) {
             match regions.iter_mut().find(|m| &m.name == r) {
                 Some(m) => m.reached_by.push(o.player.clone()),
-                None => regions.push(MissingRegion { name: r.clone(), reached_by: vec![o.player.clone()] }),
+                None => regions.push(MissingRegion {
+                    name: r.clone(),
+                    reached_by: vec![o.player.clone()],
+                }),
             }
         }
     }
@@ -152,17 +173,28 @@ pub fn compute(me: &str, mut players: Vec<Player>, order: &Order) -> Result<Catc
         .iter()
         .map(|o| Leader {
             player: o.player.clone(),
-            bosses_ahead: o.bosses.iter().filter(|b| !mine.contains(b.name.as_str())).count(),
+            bosses_ahead: o
+                .bosses
+                .iter()
+                .filter(|b| !mine.contains(b.name.as_str()))
+                .count(),
         })
         .filter(|l| l.bosses_ahead > 0)
         .max_by_key(|l| l.bosses_ahead);
 
-    Ok(CatchUp { me, others, bosses, regions, leader })
+    Ok(CatchUp {
+        me,
+        others,
+        bosses,
+        regions,
+        leader,
+    })
 }
 
 /// Reads progress/*.json, er_tables.json and, unless `me` is given, config.json from the repo clone.
 pub fn load(repo: &Path, me: Option<&str>) -> Result<CatchUp, String> {
-    let read = |p: &Path| fs::read_to_string(p).map_err(|e| format!("Can't read {}: {e}", p.display()));
+    let read =
+        |p: &Path| fs::read_to_string(p).map_err(|e| format!("Can't read {}: {e}", p.display()));
     let me = match me {
         Some(m) => m.to_string(),
         None => {
@@ -173,8 +205,8 @@ pub fn load(repo: &Path, me: Option<&str>) -> Result<CatchUp, String> {
         }
     };
     let tables_path = repo.join("er_tables.json");
-    let tables: Tables =
-        serde_json::from_str(&read(&tables_path)?).map_err(|e| format!("Bad {}: {e}", tables_path.display()))?;
+    let tables: Tables = serde_json::from_str(&read(&tables_path)?)
+        .map_err(|e| format!("Bad {}: {e}", tables_path.display()))?;
 
     let dir = repo.join("progress");
     let entries = fs::read_dir(&dir).map_err(|e| format!("Can't read {}: {e}", dir.display()))?;
@@ -182,7 +214,10 @@ pub fn load(repo: &Path, me: Option<&str>) -> Result<CatchUp, String> {
     for entry in entries.flatten() {
         let path = entry.path();
         if path.extension().is_some_and(|x| x == "json") {
-            players.push(serde_json::from_str(&read(&path)?).map_err(|e| format!("Bad {}: {e}", path.display()))?);
+            players.push(
+                serde_json::from_str(&read(&path)?)
+                    .map_err(|e| format!("Bad {}: {e}", path.display()))?,
+            );
         }
     }
     compute(&me, players, &Order::from_bosses(&tables.bosses))
@@ -196,10 +231,15 @@ pub fn when_text(iso: &str) -> String {
         let (month, day) = (d.next()??, d.next()??);
         let mut t = time.split(':');
         let (hour, minute) = (t.next()?.parse::<u32>().ok()?, t.next()?);
-        let name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-            .get(month.checked_sub(1)?)?;
+        let name = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ]
+        .get(month.checked_sub(1)?)?;
         let h12 = if hour % 12 == 0 { 12 } else { hour % 12 };
-        Some(format!("{name} {day}, {h12}:{minute} {}", if hour < 12 { "AM" } else { "PM" }))
+        Some(format!(
+            "{name} {day}, {h12}:{minute} {}",
+            if hour < 12 { "AM" } else { "PM" }
+        ))
     };
     parse().unwrap_or_else(|| iso.to_string())
 }
@@ -209,7 +249,11 @@ mod tests {
     use super::*;
 
     fn boss(name: &str, region: &str) -> Boss {
-        Boss { name: name.into(), region: region.into() }
+        Boss {
+            name: name.into(),
+            region: region.into(),
+            flag: None,
+        }
     }
 
     fn player(name: &str, bosses: &[(&str, &str)], regions: &[&str]) -> Player {
@@ -236,32 +280,70 @@ mod tests {
     fn lists_what_others_have_that_i_dont_in_table_order() {
         let players = vec![
             player("Toozy", &[("Tree Sentinel", "Limgrave")], &["Limgrave"]),
-            player("Arya", &[("Smarag", "Liurnia"), ("Godrick", "Limgrave"), ("Margit", "Limgrave")], &["Limgrave", "Liurnia", "Caelid"]),
-            player("Ben", &[("Margit", "Limgrave"), ("Tree Sentinel", "Limgrave")], &["Limgrave", "Caelid"]),
+            player(
+                "Arya",
+                &[
+                    ("Smarag", "Liurnia"),
+                    ("Godrick", "Limgrave"),
+                    ("Margit", "Limgrave"),
+                ],
+                &["Limgrave", "Liurnia", "Caelid"],
+            ),
+            player(
+                "Ben",
+                &[("Margit", "Limgrave"), ("Tree Sentinel", "Limgrave")],
+                &["Limgrave", "Caelid"],
+            ),
         ];
         let c = compute("Toozy", players, &order()).unwrap();
 
         assert_eq!(c.bosses.len(), 2);
         assert_eq!(c.bosses[0].0, "Limgrave");
-        let limgrave: Vec<_> = c.bosses[0].1.iter().map(|b| (b.name.as_str(), b.beaten_by.clone())).collect();
-        assert_eq!(limgrave, vec![("Margit", vec!["Arya".into(), "Ben".into()]), ("Godrick", vec!["Arya".into()])]);
+        let limgrave: Vec<_> = c.bosses[0]
+            .1
+            .iter()
+            .map(|b| (b.name.as_str(), b.beaten_by.clone()))
+            .collect();
+        assert_eq!(
+            limgrave,
+            vec![
+                ("Margit", vec!["Arya".into(), "Ben".into()]),
+                ("Godrick", vec!["Arya".into()])
+            ]
+        );
         assert_eq!(c.bosses[1].0, "Liurnia");
         assert_eq!(c.boss_count(), 3);
 
         assert_eq!(
             c.regions,
             vec![
-                MissingRegion { name: "Liurnia".into(), reached_by: vec!["Arya".into()] },
-                MissingRegion { name: "Caelid".into(), reached_by: vec!["Arya".into(), "Ben".into()] },
+                MissingRegion {
+                    name: "Liurnia".into(),
+                    reached_by: vec!["Arya".into()]
+                },
+                MissingRegion {
+                    name: "Caelid".into(),
+                    reached_by: vec!["Arya".into(), "Ben".into()]
+                },
             ]
         );
-        assert_eq!(c.leader, Some(Leader { player: "Arya".into(), bosses_ahead: 3 }));
+        assert_eq!(
+            c.leader,
+            Some(Leader {
+                player: "Arya".into(),
+                bosses_ahead: 3
+            })
+        );
     }
 
     #[test]
     fn caught_up_has_no_leader() {
         let players = vec![
-            player("Toozy", &[("Margit", "Limgrave"), ("Godrick", "Limgrave")], &["Limgrave"]),
+            player(
+                "Toozy",
+                &[("Margit", "Limgrave"), ("Godrick", "Limgrave")],
+                &["Limgrave"],
+            ),
             player("Arya", &[("Margit", "Limgrave")], &["Limgrave"]),
         ];
         let c = compute("Toozy", players, &order()).unwrap();
@@ -273,7 +355,11 @@ mod tests {
     fn unknown_bosses_go_last() {
         let players = vec![
             player("Toozy", &[], &[]),
-            player("Arya", &[("Some DLC Boss", "Gravesite Plain"), ("Rennala", "Liurnia")], &[]),
+            player(
+                "Arya",
+                &[("Some DLC Boss", "Gravesite Plain"), ("Rennala", "Liurnia")],
+                &[],
+            ),
         ];
         let c = compute("Toozy", players, &order()).unwrap();
         let regions: Vec<_> = c.bosses.iter().map(|(r, _)| r.as_str()).collect();
