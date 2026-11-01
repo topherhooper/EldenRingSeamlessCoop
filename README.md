@@ -66,6 +66,7 @@ Other commands:
 | `er_tables.json` | Boss and grace event-flag tables (base game). |
 | `tools/build_tables.py` | Rebuilds `er_tables.json` from ER-Save-Editor's source files. |
 | `docs/how-it-works.md` | Save format, sync details, recovery, and how to update the tables. |
+| `overlay/` | Optional in-game overlay that shows your catch-up list. See [overlay/README.md](overlay/README.md). |
 
 ## Limits
 
