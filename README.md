@@ -7,7 +7,7 @@ Tracks each player's progress in our Seamless Co-op run, so we can see who is be
 - a catch-up list of what each player is missing compared with the others
 - a boss checklist by region
 
-Each sync is a commit, so `git log` is the progress log.
+**[LOG.md](LOG.md)** is the joint log: one line per sync from every player, newest first, grouped by day. For example, "**9:40 PM · Arya**: Beat Margit, the Fell Omen and Godrick the Grafted. Reached Stormveil Castle. Level 24 → 31."
 
 Progress is read straight from each player's save file. The scripts only read the save; they never write to it.
 
@@ -42,7 +42,7 @@ After a session, quit to the main menu or close the game so the save is current,
 python -I er_sync.py
 ```
 
-It pulls, writes `progress/<you>.json`, rebuilds `PROGRESS.md`, commits with a message like `Toozy: Lv 18 -> 25; beat Margit, the Fell Omen`, and pushes. If nothing changed since your last sync, it says so and does nothing. If someone else pushed at the same moment, it pulls and retries.
+It pulls, writes `progress/<you>.json`, adds an entry to `log/<you>.jsonl`, rebuilds `PROGRESS.md` and `LOG.md`, commits with a message like `Toozy: Lv 18 -> 25; beat Margit, the Fell Omen`, and pushes. If nothing changed since your last sync, it says so and does nothing. If someone else pushed at the same moment, it pulls and retries.
 
 Other commands:
 
@@ -50,7 +50,7 @@ Other commands:
 |---|---|
 | `python -I er_sync.py --dry-run` | Shows what's new since your last sync. Changes nothing. |
 | `python -I er_sync.py --no-push` | Commits locally without pulling or pushing. |
-| `python -I er_sync.py render` | Rebuilds `PROGRESS.md` from `progress/*.json`. |
+| `python -I er_sync.py render` | Rebuilds `PROGRESS.md` and `LOG.md` from `progress/` and `log/`. |
 | `python -I er_progress.py` | Prints every character in your save as JSON. |
 
 ## Files
@@ -58,7 +58,9 @@ Other commands:
 | File | Purpose |
 |---|---|
 | `PROGRESS.md` | Generated summary. Don't edit by hand; the next sync overwrites it. |
+| `LOG.md` | Generated joint log. Don't edit by hand. |
 | `progress/<player>.json` | Each player's last synced progress. Only that player's sync writes it. |
+| `log/<player>.jsonl` | Each player's log entries, one JSON object per sync. Only that player's sync writes it. |
 | `er_progress.py` | Reads bosses, Sites of Grace, and level from a save. |
 | `er_sync.py` | Compares the save with your last sync, updates the files, commits, and pushes. |
 | `er_tables.json` | Boss and grace event-flag tables (base game). |
