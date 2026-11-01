@@ -115,7 +115,10 @@ def commit_message(player, d):
         body += ["", "New bosses:"] + [f"- {b}" for b in d["new_bosses"]]
     if d["new_regions"]:
         body += ["", "New regions:"] + [f"- {r}" for r in d["new_regions"]]
-    counts = f"{len(d['new_bosses'])} new bosses, {len(d['new_regions'])} new regions"
+    def count(n, word):
+        return f"{n} new {word}" + ("" if n == 1 else "es" if word.endswith("s") else "s")
+
+    counts = count(len(d["new_bosses"]), "boss") + ", " + count(len(d["new_regions"]), "region")
     return f"{player}: " + ("first sync, " if d["first_sync"] else "") + counts + "\n\n" + "\n".join(body)
 
 
