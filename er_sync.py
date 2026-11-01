@@ -251,8 +251,10 @@ def load_log():
         for name in sorted(os.listdir(LOG_DIR)):
             if name.endswith(".jsonl"):
                 with open(os.path.join(LOG_DIR, name), encoding="utf-8") as f:
-                    entries += [json.loads(line) for line in f if line.strip()]
-    return sorted(entries, key=lambda e: e["time"], reverse=True)
+                    entries += [(e["time"], i, e) for i, e in
+                                enumerate(json.loads(line) for line in f if line.strip())]
+    # Ties on time go by file order, so a player's later entry still comes first
+    return [e for _, _, e in sorted(entries, key=lambda t: t[:2], reverse=True)]
 
 
 def render_log():
