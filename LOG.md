@@ -5,3 +5,4 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 ## Saturday, Oct 31, 2026
 
 - **2:58 PM · Toozy**: First sync, at level 18 with 2 bosses beaten and 4 regions reached.
+- **1:08 PM · Yara**: First sync, at level 9 with 0 bosses beaten and 0 regions reached.
