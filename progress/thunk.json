@@ -1,0 +1,29 @@
+{
+ "player": "Thunk",
+ "character": "Thunk",
+ "level": 20,
+ "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Flying Dragon Agheel (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Tree Sentinel (Limgrave)"
+  }
+ ],
+ "regions": [
+  "Limgrave",
+  "Stranded Graveyard",
+  "Stormhill",
+  "Liurnia of the Lakes",
+  "Caelid",
+  "Swamp of Aeonia"
+ ],
+ "graces_found": 20,
+ "save_modified": "2026-11-01T22:46:51"
+}
