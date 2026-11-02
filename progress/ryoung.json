@@ -1,0 +1,23 @@
+{
+ "player": "ryoung",
+ "character": "Ren",
+ "level": 19,
+ "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Tree Sentinel (Limgrave)"
+  }
+ ],
+ "regions": [
+  "Limgrave",
+  "Stranded Graveyard",
+  "Stormhill",
+  "Liurnia of the Lakes"
+ ],
+ "graces_found": 10,
+ "save_modified": "2026-10-25T22:25:38"
+}
