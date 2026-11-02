@@ -42,7 +42,7 @@ The script prints the counts and any flag IDs that have no offset. A flag with n
 2. **Pull** with `git pull --rebase --autostash`, after discarding any local changes to `PROGRESS.md` and `LOG.md`, since those files are always regenerated.
 3. **Compare** the snapshot with `progress/<player>.json` as of the last commit (not the working copy). The committed file is the record of the last sync, so there is no separate state to keep. If the level, bosses, and regions all match, it stops here.
 4. **Write** `progress/<player>.json`, and write `log/<player>.jsonl` as its committed version plus one new entry. **Rebuild** `PROGRESS.md` from every file in `progress/` and `LOG.md` from every file in `log/`, then commit all four.
-5. **Push.** If the push is rejected, it undoes the commit, keeping the player's own files, pulls again, rebuilds, and recommits. It tries up to three times.
+5. **Push.** If someone else pushed first (git rejects the push as not a fast-forward), it undoes the commit, keeping the player's own files, pulls again, rebuilds, and recommits. It tries up to three times. Any other push failure, such as no network or no push access, undoes the commit and stops right away with git's error, since retrying wouldn't help.
 
 Only a player's own sync writes their progress and log files, so rebases never conflict on those files. `PROGRESS.md` and `LOG.md` are the only shared files, and they're rebuilt after every pull instead of merged. That's why the joint log is generated: if everyone appended to one `LOG.md`, two syncs at the same moment would conflict.
 

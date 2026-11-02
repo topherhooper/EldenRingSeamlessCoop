@@ -74,6 +74,19 @@ def pull():
     git("pull", "--rebase", "--autostash")
 
 
+def push_commit():
+    """Pushes; returns None on success, "race" if someone else pushed first, else git's error.
+    --porcelain keeps the rejection status in a fixed, untranslated form."""
+    result = git("push", "--porcelain", check=False)
+    if result.returncode == 0:
+        return None
+    rejected = [line for line in result.stdout.splitlines() if line.startswith("!")]
+    if rejected and all("[rejected]" in line and ("fetch first" in line or "non-fast-forward" in line)
+                        for line in rejected):
+        return "race"
+    return (result.stderr.strip() + "\n" + "\n".join(rejected)).strip()
+
+
 def committed(path):
     """A file's text as of HEAD, or None. Comparing against HEAD rather than the working copy
     means a sync that failed to push leaves nothing behind that the next sync trips over."""
@@ -332,16 +345,19 @@ def sync(dry_run, push):
         git("commit", "-m", commit_message(cfg["player"], d))
         if not online:
             break
-        pushed = git("push", check=False)
-        if pushed.returncode == 0:
+        error = push_commit()
+        if error is None:
             break
-        # Usually someone pushed first: undo our commit, keep our own files, pull and redo
-        print("Push rejected; pulling the latest and retrying.")
+        # Undo our commit, keeping our own files, so a failed sync leaves nothing committed
         git("reset", "--soft", "HEAD~1")
         git("restore", "--staged", *GENERATED)
+        if error != "race":
+            sys.exit(f"Push failed:\n{error}\nNothing was committed; fix that and run the sync again.")
+        # Someone pushed first: pull their commits and redo ours on top
+        print("Someone else pushed first; pulling the latest and retrying.")
         pull()
     else:
-        sys.exit(f"Push failed {PUSH_ATTEMPTS} times:\n{pushed.stderr.strip()}\n"
+        sys.exit(f"Someone else pushed first {PUSH_ATTEMPTS} times in a row.\n"
                  "Nothing was committed; run the sync again later.")
     print(f"Synced {cfg['player']}.\n" + report(d))
 
