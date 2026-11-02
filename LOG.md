@@ -4,6 +4,7 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 
 ## Sunday, Nov 1, 2026
 
+- **11:17 PM · Yara**: Beat Flying Dragon Agheel (Limgrave). Reached Caelid and Swamp of Aeonia. Level 19 → 27.
 - **11:14 PM · ryoung**: Beat Flying Dragon Agheel (Limgrave). Reached Caelid and Swamp of Aeonia. Level 19 → 25.
 - **10:46 PM · Thunk**: First sync, at level 20 with 3 bosses beaten and 6 regions reached.
 - **9:47 PM · Toozy**: Beat Flying Dragon Agheel (Limgrave). Reached Caelid and Swamp of Aeonia. Level 18 → 21.

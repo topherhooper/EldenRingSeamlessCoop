@@ -1,11 +1,15 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 19,
+ "level": 27,
  "bosses": [
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Flying Dragon Agheel (Limgrave)"
   },
   {
    "region": "Limgrave",
@@ -20,8 +24,10 @@
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
-  "Liurnia of the Lakes"
+  "Liurnia of the Lakes",
+  "Caelid",
+  "Swamp of Aeonia"
  ],
- "graces_found": 12,
- "save_modified": "2026-11-01T16:55:10"
+ "graces_found": 24,
+ "save_modified": "2026-11-01T23:17:56"
 }
