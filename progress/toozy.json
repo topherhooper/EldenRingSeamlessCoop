@@ -1,11 +1,15 @@
 {
  "player": "Toozy",
  "character": "Toozy",
- "level": 18,
+ "level": 21,
  "bosses": [
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Flying Dragon Agheel (Limgrave)"
   },
   {
    "region": "Limgrave",
@@ -16,8 +20,10 @@
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
-  "Liurnia of the Lakes"
+  "Liurnia of the Lakes",
+  "Caelid",
+  "Swamp of Aeonia"
  ],
- "graces_found": 11,
- "save_modified": "2026-10-31T14:58:55"
+ "graces_found": 20,
+ "save_modified": "2026-11-01T21:47:37"
 }
