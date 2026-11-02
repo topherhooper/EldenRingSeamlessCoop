@@ -1,0 +1,27 @@
+{
+ "player": "Yara",
+ "character": "Yara",
+ "level": 19,
+ "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Crucible Knight (Stormhill Evergaol)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Soldier of Godrick"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Tree Sentinel (Limgrave)"
+  }
+ ],
+ "regions": [
+  "Limgrave",
+  "Stranded Graveyard",
+  "Stormhill",
+  "Liurnia of the Lakes"
+ ],
+ "graces_found": 12,
+ "save_modified": "2026-11-01T16:55:10"
+}
