@@ -1,8 +1,12 @@
 {
  "player": "ryoung",
  "character": "Ren",
- "level": 25,
+ "level": 30,
  "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Bloodhound Knight Darriwil (Forlorn Hound Evergaol)"
+  },
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
@@ -14,16 +18,23 @@
   {
    "region": "Limgrave",
    "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "name": "Erdtree Avatar"
   }
  ],
  "regions": [
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
+  "Weeping Peninsula",
   "Liurnia of the Lakes",
   "Caelid",
-  "Swamp of Aeonia"
+  "Swamp of Aeonia",
+  "Greyoll's Dragonbarrow",
+  "Siofra River"
  ],
- "graces_found": 19,
- "save_modified": "2026-11-01T23:14:00"
+ "graces_found": 24,
+ "save_modified": "2026-11-03T22:17:51"
 }
