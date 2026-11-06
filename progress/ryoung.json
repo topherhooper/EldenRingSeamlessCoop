@@ -1,8 +1,12 @@
 {
  "player": "ryoung",
  "character": "Ren",
- "level": 33,
+ "level": 36,
  "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Black Knife Assassin (Deathtouched Catacombs)"
+  },
   {
    "region": "Limgrave",
    "name": "Bloodhound Knight Darriwil (Forlorn Hound Evergaol)"
@@ -34,6 +38,14 @@
   {
    "region": "Weeping Peninsula",
    "name": "Leonine Misbegotten (Morne Moangrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "name": "Runebear (Earthbore Cave)"
+  },
+  {
+   "region": "Liurnia of the Lakes",
+   "name": "Adan, Thief of Fire (Malefactor's Evergaol)"
   }
  ],
  "regions": [
@@ -47,6 +59,6 @@
   "Greyoll's Dragonbarrow",
   "Siofra River"
  ],
- "graces_found": 32,
- "save_modified": "2026-11-05T22:07:52"
+ "graces_found": 38,
+ "save_modified": "2026-11-06T13:08:41"
 }
