@@ -4,6 +4,7 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 
 ## Thursday, Nov 5, 2026
 
+- **10:15 PM · Yara**: Beat Stonedigger Troll (Limgrave Tunnels) and Leonine Misbegotten (Morne Moangrave). Reached Weeping Peninsula. Level 27 → 29.
 - **10:07 PM · ryoung**: Beat Soldier of Godrick, Stonedigger Troll (Limgrave Tunnels) and Leonine Misbegotten (Morne Moangrave). Level 30 → 33.
 
 ## Tuesday, Nov 3, 2026

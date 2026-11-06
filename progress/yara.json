@@ -1,7 +1,7 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 27,
+ "level": 29,
  "bosses": [
   {
    "region": "Limgrave",
@@ -17,17 +17,26 @@
   },
   {
    "region": "Limgrave",
+   "name": "Stonedigger Troll (Limgrave Tunnels)"
+  },
+  {
+   "region": "Limgrave",
    "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "name": "Leonine Misbegotten (Morne Moangrave)"
   }
  ],
  "regions": [
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
+  "Weeping Peninsula",
   "Liurnia of the Lakes",
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 24,
- "save_modified": "2026-11-01T23:17:56"
+ "graces_found": 28,
+ "save_modified": "2026-11-05T22:15:41"
 }
