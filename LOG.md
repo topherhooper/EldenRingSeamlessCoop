@@ -10,6 +10,7 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 
 - **9:07 PM · ryoung**: Beat Grave Warden Duelist (Murkwater Catacombs), Guardian Golem (Highroad Cave) and Patches (Murkwater Cave). Level 39 → 41.
 - **5:53 PM · Thunk**: Beat Godrick the Grafted, Margit the Fell Omen and Magma Wyrm (Gael Tunnel). Reached Stormveil Castle. Level 20 → 33.
+- **2:53 PM · Yara**: Beat Godrick the Grafted. Reached Stormveil Castle. Level 29 → 34.
 - **12:34 PM · ryoung**: Beat Margit the Fell Omen and Magma Wyrm (Gael Tunnel). Level 36 → 39.
 
 ## Friday, Nov 6, 2026
