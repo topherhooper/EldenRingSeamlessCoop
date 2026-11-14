@@ -1,7 +1,7 @@
 {
  "player": "ryoung",
  "character": "Ren",
- "level": 36,
+ "level": 39,
  "bosses": [
   {
    "region": "Limgrave",
@@ -18,6 +18,10 @@
   {
    "region": "Limgrave",
    "name": "Flying Dragon Agheel (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Margit the Fell Omen"
   },
   {
    "region": "Limgrave",
@@ -46,6 +50,10 @@
   {
    "region": "Liurnia of the Lakes",
    "name": "Adan, Thief of Fire (Malefactor's Evergaol)"
+  },
+  {
+   "region": "Caelid",
+   "name": "Magma Wyrm (Gael Tunnel)"
   }
  ],
  "regions": [
@@ -59,6 +67,6 @@
   "Greyoll's Dragonbarrow",
   "Siofra River"
  ],
- "graces_found": 38,
- "save_modified": "2026-11-06T13:08:41"
+ "graces_found": 41,
+ "save_modified": "2026-11-14T12:34:28"
 }
