@@ -1,7 +1,7 @@
 {
  "player": "ryoung",
  "character": "Ren",
- "level": 39,
+ "level": 41,
  "bosses": [
   {
    "region": "Limgrave",
@@ -21,7 +21,19 @@
   },
   {
    "region": "Limgrave",
+   "name": "Grave Warden Duelist (Murkwater Catacombs)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Guardian Golem (Highroad Cave)"
+  },
+  {
+   "region": "Limgrave",
    "name": "Margit the Fell Omen"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Patches (Murkwater Cave)"
   },
   {
    "region": "Limgrave",
@@ -67,6 +79,6 @@
   "Greyoll's Dragonbarrow",
   "Siofra River"
  ],
- "graces_found": 41,
- "save_modified": "2026-11-14T12:34:28"
+ "graces_found": 46,
+ "save_modified": "2026-11-14T21:07:25"
 }
