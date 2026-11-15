@@ -1,7 +1,7 @@
 {
  "player": "Thunk",
  "character": "Thunk",
- "level": 20,
+ "level": 33,
  "bosses": [
   {
    "region": "Limgrave",
@@ -13,17 +13,30 @@
   },
   {
    "region": "Limgrave",
+   "name": "Godrick the Grafted"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Margit the Fell Omen"
+  },
+  {
+   "region": "Limgrave",
    "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Caelid",
+   "name": "Magma Wyrm (Gael Tunnel)"
   }
  ],
  "regions": [
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
+  "Stormveil Castle",
   "Liurnia of the Lakes",
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 20,
- "save_modified": "2026-11-01T22:46:51"
+ "graces_found": 30,
+ "save_modified": "2026-11-14T17:53:12"
 }
