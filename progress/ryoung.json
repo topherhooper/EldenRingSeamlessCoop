@@ -1,7 +1,7 @@
 {
  "player": "ryoung",
  "character": "Ren",
- "level": 41,
+ "level": 46,
  "bosses": [
   {
    "region": "Limgrave",
@@ -18,6 +18,10 @@
   {
    "region": "Limgrave",
    "name": "Flying Dragon Agheel (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Godrick the Grafted"
   },
   {
    "region": "Limgrave",
@@ -73,12 +77,13 @@
   "Stranded Graveyard",
   "Stormhill",
   "Weeping Peninsula",
+  "Stormveil Castle",
   "Liurnia of the Lakes",
   "Caelid",
   "Swamp of Aeonia",
   "Greyoll's Dragonbarrow",
   "Siofra River"
  ],
- "graces_found": 46,
- "save_modified": "2026-11-14T21:07:25"
+ "graces_found": 54,
+ "save_modified": "2026-11-15T16:29:27"
 }
