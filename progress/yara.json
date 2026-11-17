@@ -1,7 +1,7 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 34,
+ "level": 36,
  "bosses": [
   {
    "region": "Limgrave",
@@ -30,6 +30,10 @@
   {
    "region": "Weeping Peninsula",
    "name": "Leonine Misbegotten (Morne Moangrave)"
+  },
+  {
+   "region": "Caelid",
+   "name": "Magma Wyrm (Gael Tunnel)"
   }
  ],
  "regions": [
@@ -42,6 +46,6 @@
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 33,
- "save_modified": "2026-11-14T14:53:47"
+ "graces_found": 36,
+ "save_modified": "2026-11-15T12:25:04"
 }

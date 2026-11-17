@@ -5,6 +5,7 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 ## Sunday, Nov 15, 2026
 
 - **4:29 PM · ryoung**: Beat Godrick the Grafted. Reached Stormveil Castle. Level 41 → 46.
+- **12:25 PM · Yara**: Beat Magma Wyrm (Gael Tunnel). Level 34 → 36.
 
 ## Saturday, Nov 14, 2026
 
