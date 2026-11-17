@@ -1,7 +1,7 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 29,
+ "level": 36,
  "bosses": [
   {
    "region": "Limgrave",
@@ -10,6 +10,10 @@
   {
    "region": "Limgrave",
    "name": "Flying Dragon Agheel (Limgrave)"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Godrick the Grafted"
   },
   {
    "region": "Limgrave",
@@ -26,6 +30,10 @@
   {
    "region": "Weeping Peninsula",
    "name": "Leonine Misbegotten (Morne Moangrave)"
+  },
+  {
+   "region": "Caelid",
+   "name": "Magma Wyrm (Gael Tunnel)"
   }
  ],
  "regions": [
@@ -33,10 +41,11 @@
   "Stranded Graveyard",
   "Stormhill",
   "Weeping Peninsula",
+  "Stormveil Castle",
   "Liurnia of the Lakes",
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 28,
- "save_modified": "2026-11-05T22:15:41"
+ "graces_found": 36,
+ "save_modified": "2026-11-15T12:25:04"
 }
