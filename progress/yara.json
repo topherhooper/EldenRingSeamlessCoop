@@ -1,7 +1,7 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 36,
+ "level": 38,
  "bosses": [
   {
    "region": "Limgrave",
@@ -46,6 +46,6 @@
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 36,
- "save_modified": "2026-11-15T12:25:04"
+ "graces_found": 39,
+ "save_modified": "2026-11-21T01:17:36"
 }

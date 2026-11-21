@@ -4,3 +4,4 @@
 {"time": "2026-11-05T22:15:41", "player": "Yara", "bosses_total": 6, "regions_total": 7, "first_sync": false, "lost": false, "level": 29, "previous_level": 27, "new_bosses": ["Stonedigger Troll (Limgrave Tunnels)", "Leonine Misbegotten (Morne Moangrave)"], "new_regions": ["Weeping Peninsula"]}
 {"time": "2026-11-14T14:53:47", "player": "Yara", "bosses_total": 7, "regions_total": 8, "first_sync": false, "lost": false, "level": 34, "previous_level": 29, "new_bosses": ["Godrick the Grafted"], "new_regions": ["Stormveil Castle"]}
 {"time": "2026-11-15T12:25:04", "player": "Yara", "bosses_total": 8, "regions_total": 8, "first_sync": false, "lost": false, "level": 36, "previous_level": 34, "new_bosses": ["Magma Wyrm (Gael Tunnel)"], "new_regions": []}
+{"time": "2026-11-21T01:17:36", "player": "Yara", "bosses_total": 8, "regions_total": 8, "first_sync": false, "lost": false, "level": 38, "previous_level": 36, "new_bosses": [], "new_regions": []}
