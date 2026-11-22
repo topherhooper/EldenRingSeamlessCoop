@@ -34,6 +34,21 @@ Progress is read straight from each player's save file. The scripts only read th
    python -I er_sync.py --dry-run
    ```
 
+## Starting the game
+
+Run `play.bat` (double-click it, or make a desktop shortcut to it). It starts Steam if it isn't running, waits until Steam is logged in, then starts the game through Seamless Co-op's `ersc_launcher.exe`. Starting `ersc_launcher.exe` directly works too, as long as Steam is already running.
+
+The game is found through your Steam libraries. If it's somewhere else:
+
+```
+powershell -ExecutionPolicy Bypass -File tools\play.ps1 -Game "D:\Games\ELDEN RING\Game"
+```
+
+### If the game won't start
+
+- **The game closes a few seconds after launch, with no message.** Steam isn't running, or hasn't finished logging in; typical after a reboot when Steam isn't set to start with Windows. Seamless Co-op quits the game when it can't reach Steam. It leaves a small `.dmp` file in `ELDEN RING\Game\SeamlessCoop\crashdumps\reports` and nothing else. Start Steam first, or use `play.bat`.
+- **With the overlay installed, `catchup_overlay.log` stops after the "Keyboard and mouse blocking hooked" line.** Same cause. The overlay's next line only appears once the game has finished starting, so it isn't a sign the overlay failed.
+
 ## Syncing
 
 After a session, quit to the main menu or close the game so the save is current, then run:
@@ -63,6 +78,7 @@ Other commands:
 | `log/<player>.jsonl` | Each player's log entries, one JSON object per sync. Only that player's sync writes it. |
 | `er_progress.py` | Reads bosses, Sites of Grace, and level from a save. |
 | `er_sync.py` | Compares the save with your last sync, updates the files, commits, and pushes. |
+| `play.bat`, `tools/play.ps1` | Starts Steam if needed, then the game through Seamless Co-op's launcher. |
 | `er_tables.json` | Boss and grace event-flag tables (base game). |
 | `tools/build_tables.py` | Rebuilds `er_tables.json` from ER-Save-Editor's source files. |
 | `docs/how-it-works.md` | Save format, sync details, recovery, and how to update the tables. |
