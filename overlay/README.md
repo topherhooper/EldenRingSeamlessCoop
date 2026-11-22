@@ -5,7 +5,7 @@ An in-game overlay for Elden Ring for catching up with the rest of the group:
 - **During play** it shows only a compass pointing at the boss you picked, with a rough distance. With no target set, the screen stays clear.
 - **A menu** holds the "Catch-up" list from [PROGRESS.md](../PROGRESS.md): the bosses and regions the others have done that you haven't, grouped by region, with who did each one. You pick the compass target there.
 
-The list comes from this repo's JSON files (`progress/*.json`, `config.json`, `er_tables.json`) in your clone. When those files change, for example after a `git pull` or a sync, it updates within 2 seconds. The compass reads your position and the camera direction from game memory. It never writes to the game or your save.
+The list comes from this repo's JSON files (`progress/*.json`, `config.json`, `er_tables.json`) in your clone. When those files change, for example after a `git pull` or a sync, it updates within 2 seconds. The compass reads your position and the camera direction from game memory, and the overlay reads the listed bosses' kill flags there to notice a kill as it happens. It never writes to the game or your save.
 
 It's optional and local: other players don't need it, and it doesn't change anything they see.
 
@@ -26,7 +26,7 @@ The HUD shows:
 - **With a target:** a compass. The arrow points at the boss relative to the camera, so straight up means "ahead", with the distance and region under the name.
 - **Without a target:** nothing, except a short hint at start, after closing the menu, or when the list changes.
 
-Your target is saved in `catchup_overlay_target.txt` next to the DLL, so it's still set next session. Once you've beaten the boss and synced, it drops off the list, and the overlay clears the target and says so.
+Your target is saved in `catchup_overlay_target.txt` next to the DLL, so it's still set next session. Once you've beaten the boss, it drops off the list, and the overlay clears the target and says so. You don't need to sync first.
 
 ### The compass
 
@@ -143,14 +143,21 @@ The overlay writes `catchup_overlay.log` next to the DLL each time the game star
 - whether it hooked the game's drawing and input
 - whether the compass can work with this game version
 - each time it loads progress
-- the first frame it drew
+- the first frame it drew, and resolution changes after that
+- a frozen game: "Frame stuck for N s while <step>" means the overlay's own code hung in that step; "No frame for N s; the last one finished normally" means the game stopped drawing with the overlay idle, so the stall is in the game, the driver or another hook (the Steam or NVIDIA overlay). Minimizing the game also logs the second one, followed by "Frames resumed" when it comes back.
 
 If nothing shows up, press F9 first: with no compass target, the overlay only shows a short hint at start and when you load in. If F9 does nothing either, the log says how far the overlay got.
+
+If the log stops after the "Keyboard and mouse blocking hooked" line and the game closed within a few seconds, the overlay didn't fail: its next line, "Compass ready", only comes once the game has finished starting. The game was shut down before that, almost always by Seamless Co-op because Steam wasn't running. See "If the game won't start" in the [main README](../README.md).
 
 ## Keeping it current
 
 - **Other players' progress** is only as fresh as your clone. `er_sync.py` pulls when you sync; otherwise run `git pull` before playing.
-- **Your own progress** is only as fresh as your last sync. A boss you beat this session stays on the list until you quit to the menu and run `er_sync.py`.
+- **Your own progress** comes from your last sync, plus the bosses the overlay has seen you beat since. It sees a kill two ways, both from the game's kill flags:
+  - A listed boss dies while you're playing. It comes off the list within a second.
+  - A listed boss is already dead in the first world you load after starting the game, which is always your own. This covers kills from an earlier session that you haven't synced.
+
+  In a friend's world the flags are the friend's, so a boss that was already dead when you joined stays on your list. The overlay forgets what it saw when the game closes, and `PROGRESS.md` and the other players only change when you run `er_sync.py`. Regions you've reached still wait for a sync.
 
 The menu shows when each player last synced, so you can tell when the list is old.
 
@@ -158,7 +165,8 @@ The menu shows when each player last synced, so you can tell when the list is ol
 
 - `src/lib.rs`: hooks the game's DirectX 12 rendering with [hudhook](https://github.com/veeenu/hudhook), draws the HUD and menu with Dear ImGui, handles menu input, and keeps the compass target.
 - `src/compass.rs`: where bosses and the player are on the overworld (from kill flags, map tiles and the dungeon table), and the arrow's angle.
-- `src/game.rs`: checks the game version, then reads the player's map and position, the camera and the dungeon table from game memory. It copies values out with `ReadProcessMemory`, so a stale pointer during a loading screen gives an error instead of a crash.
+- `src/game.rs`: checks the game version, then reads the player's map and position, the camera and the dungeon table from game memory. It copies values out with `ReadProcessMemory`, so a stale pointer during a loading screen gives an error instead of a crash. Kill flags are the exception: they go through fromsoftware-rs's own lookup, and only while a character is loaded.
+- `src/kills.rs`: decides which set kill flags are your kills, since in a friend's world the flags are the friend's.
 - `src/pad.rs`: reads controllers through XInput and, for PlayStation controllers, straight from their HID reports. Works out which kind is in use, and hooks `XInputGetState` to hide the combo, and the whole controller while the menu is open.
 - `src/dinput.rs`: hides keyboard and mouse from the game while the menu is open, and forwards `DirectInput8Create` for the `dinput8.dll` install.
 - `src/catchup.rs`: loads the JSON files and works out the catch-up list, using the same rules as `er_sync.py render`.

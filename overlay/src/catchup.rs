@@ -106,6 +106,48 @@ impl CatchUp {
     pub fn boss_count(&self) -> usize {
         self.bosses.iter().map(|(_, b)| b.len()).sum()
     }
+
+    /// Counts the listed bosses with these kill flags as mine, as the next sync will: they leave
+    /// the list and join my bosses. Returns their names, in list order.
+    pub fn mark_beaten(&mut self, flags: &HashSet<u32>) -> Vec<String> {
+        let mut names = Vec::new();
+        for (_, list) in &mut self.bosses {
+            let (beaten, left): (Vec<_>, Vec<_>) = std::mem::take(list)
+                .into_iter()
+                .partition(|b| b.flag.is_some_and(|f| flags.contains(&f)));
+            *list = left;
+            for b in beaten {
+                names.push(b.name.clone());
+                self.me.bosses.push(Boss {
+                    name: b.name,
+                    region: b.region,
+                    flag: b.flag,
+                });
+            }
+        }
+        if !names.is_empty() {
+            self.bosses.retain(|(_, list)| !list.is_empty());
+            self.leader = leader(&self.me, &self.others);
+        }
+        names
+    }
+}
+
+/// The other player with the most bosses I haven't beaten, if anyone has any.
+fn leader(me: &Player, others: &[Player]) -> Option<Leader> {
+    let mine: HashSet<&str> = me.bosses.iter().map(|b| b.name.as_str()).collect();
+    others
+        .iter()
+        .map(|o| Leader {
+            player: o.player.clone(),
+            bosses_ahead: o
+                .bosses
+                .iter()
+                .filter(|b| !mine.contains(b.name.as_str()))
+                .count(),
+        })
+        .filter(|l| l.bosses_ahead > 0)
+        .max_by_key(|l| l.bosses_ahead)
 }
 
 pub fn compute(me: &str, mut players: Vec<Player>, order: &Order) -> Result<CatchUp, String> {
@@ -169,18 +211,7 @@ pub fn compute(me: &str, mut players: Vec<Player>, order: &Order) -> Result<Catc
         }
     }
 
-    let leader = others
-        .iter()
-        .map(|o| Leader {
-            player: o.player.clone(),
-            bosses_ahead: o
-                .bosses
-                .iter()
-                .filter(|b| !mine.contains(b.name.as_str()))
-                .count(),
-        })
-        .filter(|l| l.bosses_ahead > 0)
-        .max_by_key(|l| l.bosses_ahead);
+    let leader = leader(&me, &others);
 
     Ok(CatchUp {
         me,
@@ -349,6 +380,76 @@ mod tests {
         let c = compute("Toozy", players, &order()).unwrap();
         assert!(c.bosses.is_empty() && c.regions.is_empty());
         assert_eq!(c.leader, None);
+    }
+
+    /// Toozy has beaten nothing; Arya has Margit (flag 10), Godrick (11) and Rennala (20); Ben has
+    /// Margit.
+    fn behind_on_three() -> CatchUp {
+        let flagged = |name: &str, region: &str, flag| Boss {
+            flag: Some(flag),
+            ..boss(name, region)
+        };
+        let order = Order::from_bosses(&[
+            flagged("Margit", "Limgrave", 10),
+            flagged("Godrick", "Limgrave", 11),
+            flagged("Rennala", "Liurnia", 20),
+        ]);
+        let players = vec![
+            player("Toozy", &[], &[]),
+            player(
+                "Arya",
+                &[
+                    ("Margit", "Limgrave"),
+                    ("Godrick", "Limgrave"),
+                    ("Rennala", "Liurnia"),
+                ],
+                &[],
+            ),
+            player("Ben", &[("Margit", "Limgrave")], &[]),
+        ];
+        compute("Toozy", players, &order).unwrap()
+    }
+
+    fn listed(c: &CatchUp) -> Vec<(&str, Vec<&str>)> {
+        c.bosses
+            .iter()
+            .map(|(r, list)| (r.as_str(), list.iter().map(|b| b.name.as_str()).collect()))
+            .collect()
+    }
+
+    #[test]
+    fn bosses_marked_beaten_leave_the_list_and_count_as_mine() {
+        let mut c = behind_on_three();
+        let names = c.mark_beaten(&HashSet::from([10, 20]));
+
+        assert_eq!(names, vec!["Margit", "Rennala"]);
+        // Liurnia had only Rennala, so the region goes too.
+        assert_eq!(listed(&c), vec![("Limgrave", vec!["Godrick"])]);
+        let mine: Vec<_> = c.me.bosses.iter().map(|b| b.name.as_str()).collect();
+        assert_eq!(mine, vec!["Margit", "Rennala"]);
+        assert_eq!(
+            c.leader,
+            Some(Leader {
+                player: "Arya".into(),
+                bosses_ahead: 1
+            })
+        );
+    }
+
+    #[test]
+    fn marking_every_boss_beaten_leaves_no_leader() {
+        let mut c = behind_on_three();
+        c.mark_beaten(&HashSet::from([10, 11, 20]));
+        assert!(c.bosses.is_empty());
+        assert_eq!(c.leader, None);
+    }
+
+    #[test]
+    fn marking_a_flag_that_is_not_listed_changes_nothing() {
+        let mut c = behind_on_three();
+        assert!(c.mark_beaten(&HashSet::from([99])).is_empty());
+        assert_eq!(c.boss_count(), 3);
+        assert!(c.me.bosses.is_empty());
     }
 
     #[test]

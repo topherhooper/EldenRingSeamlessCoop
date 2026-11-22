@@ -1,5 +1,5 @@
-//! Reads, never writes, the few things the compass needs from game memory: the player's map and
-//! position, which way the camera faces, and the dungeon-to-overworld table.
+//! Reads, never writes, the few things the overlay needs from game memory: the player's map and
+//! position, which way the camera faces, the dungeon-to-overworld table, and boss kill flags.
 //!
 //! The structure layouts come from fromsoftware-rs and only match one game version, so nothing is
 //! read unless the game is that version. A game patch turns the compass off until the overlay is
@@ -15,7 +15,8 @@ use std::sync::OnceLock;
 use std::time::Duration;
 
 use eldenring::cs::{
-    CSCam, CSCamera, PlayerIns, SoloParamRepository, WorldChrMan, WorldMapLegacyConvParam,
+    CSCam, CSCamera, CSEventFlagMan, PlayerIns, SoloParamRepository, WorldChrMan,
+    WorldMapLegacyConvParam,
 };
 use eldenring::position::BlockPosition;
 use fromsoftware_shared::{F32ViewMatrix, FromStatic, Program};
@@ -70,6 +71,7 @@ pub fn init() {
                 WorldChrMan::instance_ptr(),
                 CSCamera::instance_ptr(),
                 SoloParamRepository::instance_ptr(),
+                CSEventFlagMan::instance_ptr(),
             );
             STATE.store(READY, Ordering::SeqCst);
         }
@@ -194,6 +196,20 @@ pub fn snapshot() -> Result<Snapshot, &'static str> {
         local: [position.x, position.y, position.z],
         forward,
     })
+}
+
+/// Whether each of these event flags is set in the world the player is in, or None when no
+/// character is loaded. In a friend's world these are the friend's flags.
+pub fn event_flags(flags: &[u32]) -> Option<Vec<bool>> {
+    // Like the params, the flags are only read once there's a player.
+    snapshot().ok()?;
+    let man = unsafe { CSEventFlagMan::instance() }.ok()?;
+    Some(
+        flags
+            .iter()
+            .map(|&f| man.virtual_memory_flag.get_flag(f))
+            .collect(),
+    )
 }
 
 /// WorldMapLegacyConvParam, copied once the game has loaded its params.

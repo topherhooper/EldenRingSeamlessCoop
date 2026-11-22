@@ -6,8 +6,8 @@
 //!   open the game doesn't see keyboard, mouse or controller input.
 //!
 //! The list comes from the progress repo's JSON files. The compass reads the player's position
-//! and the camera from game memory, read-only (see `game`). Nothing is written to the game or
-//! the save.
+//! and the camera from game memory, read-only (see `game`), and so does the check for bosses
+//! beaten since the last sync (see `kills`). Nothing is written to the game or the save.
 //!
 //! Load it with ModEngine2 (`external_dlls`), or rename it to dinput8.dll and put it in the game
 //! folder: it forwards DirectInput8Create to the real dinput8.dll.
@@ -16,6 +16,7 @@ pub mod catchup;
 pub mod compass;
 mod dinput;
 mod game;
+pub mod kills;
 pub mod pad;
 pub mod settings;
 pub mod view;
@@ -23,7 +24,7 @@ pub mod view;
 use std::ffi::c_void;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU64, AtomicU8, Ordering};
 use std::time::{Duration, Instant, SystemTime};
 
 use hudhook::hooks::dx12::ImguiDx12Hooks;
@@ -41,6 +42,7 @@ use hudhook::windows::Win32::UI::WindowsAndMessaging::{
 use hudhook::{Hudhook, ImguiRenderLoop, RenderContext};
 
 use catchup::CatchUp;
+use kills::Kills;
 use pad::{Pad, STICK_DOWN, STICK_UP};
 use settings::{Corner, PadStyle, Settings, StyleSetting, A, B, DOWN, LB, RB, UP};
 use view::{Style, Target};
@@ -49,6 +51,10 @@ const INI_NAME: &str = "catchup_overlay.ini";
 /// Remembers the compass target between game sessions.
 const TARGET_FILE: &str = "catchup_overlay_target.txt";
 const RELOAD_EVERY: Duration = Duration::from_secs(2);
+const KILLS_EVERY: Duration = Duration::from_millis(500);
+/// How long after loading in before the kill flags are read, so a friend's world has arrived
+/// in full and its flags aren't taken for kills.
+const KILLS_SETTLE: Duration = Duration::from_secs(3);
 const FADE_IN: f32 = 0.15;
 /// How long the hint stays up at start, after closing the menu, or when the list changes.
 const HINT_FOR: Duration = Duration::from_secs(8);
@@ -92,6 +98,83 @@ pub(crate) fn log(message: impl AsRef<str>) {
             t.wSecond,
             message.as_ref()
         );
+    }
+}
+
+// --- Frame watchdog ------------------------------------------------------------------------------
+//
+// If the game freezes, the log should say whether the overlay was in the middle of a frame, and in
+// which step, or whether frames simply stopped coming, which puts the stall in the game or in
+// another hook. `render` records its step; a thread checks once a second.
+
+const STEP_NAMES: [&str; 7] = [
+    "idle",
+    "reading the game",
+    "reading input",
+    "reloading progress",
+    "handling input",
+    "drawing",
+    "checking kill flags",
+];
+static FRAME_STEP: AtomicU8 = AtomicU8::new(0);
+/// Milliseconds since the DLL loaded, when the current frame started and the last one finished.
+static FRAME_STARTED: AtomicU64 = AtomicU64::new(0);
+static FRAME_ENDED: AtomicU64 = AtomicU64::new(0);
+
+fn uptime_ms() -> u64 {
+    static START: std::sync::OnceLock<Instant> = std::sync::OnceLock::new();
+    START.get_or_init(Instant::now).elapsed().as_millis() as u64 + 1
+}
+
+fn step(step: u8) {
+    if step == 1 {
+        FRAME_STARTED.store(uptime_ms(), Ordering::Relaxed);
+    }
+    FRAME_STEP.store(step, Ordering::Relaxed);
+    if step == 0 {
+        FRAME_ENDED.store(uptime_ms(), Ordering::Relaxed);
+    }
+}
+
+fn watchdog() {
+    const STUCK_AFTER: u64 = 3_000;
+    const NO_FRAME_AFTER: u64 = 5_000;
+    // When the stall being reported began.
+    let mut reported: Option<u64> = None;
+    loop {
+        std::thread::sleep(Duration::from_secs(1));
+        let started = FRAME_STARTED.load(Ordering::Relaxed);
+        let ended = FRAME_ENDED.load(Ordering::Relaxed);
+        if started == 0 {
+            // The game hasn't drawn a frame yet.
+            continue;
+        }
+        let now = uptime_ms();
+        let step = FRAME_STEP.load(Ordering::Relaxed) as usize;
+        let (stalled, since) = if step != 0 {
+            (now - started >= STUCK_AFTER, started)
+        } else {
+            (now - ended >= NO_FRAME_AFTER, ended)
+        };
+        match (stalled, reported) {
+            (true, None) => {
+                reported = Some(since);
+                let secs = (now - since) / 1000;
+                log(if step != 0 {
+                    format!("Frame stuck for {secs} s while {}", STEP_NAMES[step])
+                } else {
+                    format!(
+                        "No frame for {secs} s; the last one finished normally, so the stall is \
+                         in the game or another hook (or the game is minimized)"
+                    )
+                });
+            }
+            (false, Some(since)) => {
+                reported = None;
+                log(format!("Frames resumed after {} s", (now - since) / 1000));
+            }
+            _ => {}
+        }
     }
 }
 
@@ -180,6 +263,13 @@ struct Overlay {
     drawing: bool,
     /// A character is loaded, as far as the compass can tell.
     in_world: bool,
+    /// When the character loaded, while one is.
+    world_since: Option<Instant>,
+    /// Bosses beaten since the last sync, noticed from the game's kill flags.
+    kills: Kills,
+    kills_checked: Option<Instant>,
+    /// The last frame's size, to log resolution changes.
+    display: [f32; 2],
 }
 
 impl Overlay {
@@ -245,6 +335,10 @@ impl Overlay {
             saved_target,
             drawing: false,
             in_world: false,
+            world_since: None,
+            kills: Kills::default(),
+            kills_checked: None,
+            display: [0.0, 0.0],
         }
     }
 
@@ -296,7 +390,57 @@ impl Overlay {
                 self.hint_until = Instant::now() + HINT_FOR;
             }
         }
+        // The files only know about the last sync; kills since then come off again.
+        self.apply_kills();
         self.check_target();
+    }
+
+    /// Reads the listed bosses' kill flags from the game, to notice a kill without a sync.
+    fn check_kills(&mut self) {
+        let settled = self
+            .world_since
+            .is_some_and(|t| t.elapsed() >= KILLS_SETTLE);
+        if !settled || self.kills_checked.is_some_and(|t| t.elapsed() < KILLS_EVERY) {
+            return;
+        }
+        self.kills_checked = Some(Instant::now());
+        let Ok(c) = &self.data else { return };
+        let flags: Vec<u32> = c
+            .bosses
+            .iter()
+            .flat_map(|(_, list)| list)
+            .filter_map(|b| b.flag)
+            .collect();
+        let Some(states) = game::event_flags(&flags) else {
+            return;
+        };
+        let watched: Vec<(u32, bool)> = flags.into_iter().zip(states).collect();
+        if !self.kills.observe(&watched).is_empty() {
+            self.apply_kills();
+        }
+    }
+
+    /// Takes the bosses found beaten off the list, and the compass off a beaten target.
+    fn apply_kills(&mut self) {
+        let Ok(c) = &mut self.data else { return };
+        let names = c.mark_beaten(self.kills.beaten());
+        if names.is_empty() {
+            return;
+        }
+        log(format!(
+            "Beaten since the last sync: {}",
+            names.join(", ")
+        ));
+        self.hint_until = Instant::now() + HINT_FOR;
+        let beaten_target = self
+            .target
+            .as_ref()
+            .map(|t| t.name.clone())
+            .filter(|name| names.contains(name));
+        if let Some(name) = beaten_target {
+            self.note = Some(format!("{name} beaten"));
+            self.set_target(None);
+        }
     }
 
     /// The bosses the menu lets you pick, in list order.
@@ -1083,29 +1227,45 @@ impl ImguiRenderLoop for Overlay {
     }
 
     fn render(&mut self, ui: &mut Ui) {
+        step(1);
         // Show the hint on the first frame, and again on loading into the world, which is
         // when the player is looking.
         let in_world = game::snapshot().is_ok();
+        let display = ui.io().display_size;
         if !self.drawing {
-            let [w, h] = ui.io().display_size;
-            log(format!("First frame drawn ({w}x{h})"));
+            log(format!("First frame drawn ({}x{})", display[0], display[1]));
+        } else if display != self.display {
+            log(format!("Display size changed to {}x{}", display[0], display[1]));
         }
+        self.display = display;
         if in_world && !self.in_world {
             log("Character loaded");
+            self.world_since = Some(Instant::now());
+        }
+        if !in_world && self.in_world {
+            self.world_since = None;
+            self.kills.left_world();
         }
         if !self.drawing || (in_world && !self.in_world) {
             self.drawing = true;
             self.hint_until = Instant::now() + HINT_FOR;
         }
         self.in_world = in_world;
+        step(2);
         let input = self.read_input();
+        step(3);
         self.reload_if_changed();
+        step(6);
+        self.check_kills();
+        step(4);
         self.handle(input);
+        step(5);
         if self.menu_open {
             self.draw_menu(ui);
         } else {
             self.draw_hud(ui);
         }
+        step(0);
     }
 }
 
@@ -1168,6 +1328,7 @@ pub unsafe extern "system" fn DllMain(module: HINSTANCE, reason: u32, _: *mut c_
                 "Keyboard and mouse blocking hooked: {}",
                 dinput::install()
             ));
+            std::thread::spawn(watchdog);
             game::init();
             log(match game::unavailable() {
                 None => "Compass ready".to_string(),
