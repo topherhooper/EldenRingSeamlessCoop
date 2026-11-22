@@ -1,8 +1,12 @@
 {
  "player": "Toozy",
  "character": "Toozy",
- "level": 21,
+ "level": 24,
  "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Bloodhound Knight Darriwil (Forlorn Hound Evergaol)"
+  },
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
@@ -14,16 +18,21 @@
   {
    "region": "Limgrave",
    "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "name": "Erdtree Avatar"
   }
  ],
  "regions": [
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
+  "Weeping Peninsula",
   "Liurnia of the Lakes",
   "Caelid",
   "Swamp of Aeonia"
  ],
- "graces_found": 20,
- "save_modified": "2026-11-01T21:47:37"
+ "graces_found": 23,
+ "save_modified": "2026-11-21T19:31:58"
 }
