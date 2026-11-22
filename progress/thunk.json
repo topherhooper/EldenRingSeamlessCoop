@@ -1,8 +1,12 @@
 {
  "player": "Thunk",
  "character": "Thunk",
- "level": 33,
+ "level": 46,
  "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Bell Bearing Hunter (Warmaster's Shack)"
+  },
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
@@ -21,22 +25,40 @@
   },
   {
    "region": "Limgrave",
+   "name": "Soldier of Godrick"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Stonedigger Troll (Limgrave Tunnels)"
+  },
+  {
+   "region": "Limgrave",
    "name": "Tree Sentinel (Limgrave)"
+  },
+  {
+   "region": "Weeping Peninsula",
+   "name": "Runebear (Earthbore Cave)"
   },
   {
    "region": "Caelid",
    "name": "Magma Wyrm (Gael Tunnel)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "name": "Deathbird (Warmaster's Shack)"
   }
  ],
  "regions": [
   "Limgrave",
   "Stranded Graveyard",
   "Stormhill",
+  "Weeping Peninsula",
   "Stormveil Castle",
   "Liurnia of the Lakes",
   "Caelid",
-  "Swamp of Aeonia"
+  "Swamp of Aeonia",
+  "Siofra River"
  ],
- "graces_found": 30,
- "save_modified": "2026-11-14T17:53:12"
+ "graces_found": 36,
+ "save_modified": "2026-11-21T23:04:55"
 }

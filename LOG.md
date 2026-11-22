@@ -4,6 +4,7 @@ Every sync by every player, newest first. Times are each player's local time. Ge
 
 ## Saturday, Nov 21, 2026
 
+- **11:04 PM · Thunk**: Beat Bell Bearing Hunter (Warmaster's Shack), Soldier of Godrick, Stonedigger Troll (Limgrave Tunnels), Runebear (Earthbore Cave) and Deathbird (Warmaster's Shack). Reached Weeping Peninsula and Siofra River. Level 33 → 46.
 - **7:31 PM · Toozy**: Beat Bloodhound Knight Darriwil (Forlorn Hound Evergaol) and Erdtree Avatar. Reached Weeping Peninsula. Level 21 → 24.
 
 ## Sunday, Nov 15, 2026
