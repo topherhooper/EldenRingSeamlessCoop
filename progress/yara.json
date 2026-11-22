@@ -1,8 +1,12 @@
 {
  "player": "Yara",
  "character": "Yara",
- "level": 36,
+ "level": 47,
  "bosses": [
+  {
+   "region": "Limgrave",
+   "name": "Bell Bearing Hunter (Warmaster's Shack)"
+  },
   {
    "region": "Limgrave",
    "name": "Crucible Knight (Stormhill Evergaol)"
@@ -14,6 +18,10 @@
   {
    "region": "Limgrave",
    "name": "Godrick the Grafted"
+  },
+  {
+   "region": "Limgrave",
+   "name": "Margit the Fell Omen"
   },
   {
    "region": "Limgrave",
@@ -32,8 +40,16 @@
    "name": "Leonine Misbegotten (Morne Moangrave)"
   },
   {
+   "region": "Weeping Peninsula",
+   "name": "Runebear (Earthbore Cave)"
+  },
+  {
    "region": "Caelid",
    "name": "Magma Wyrm (Gael Tunnel)"
+  },
+  {
+   "region": "Capital Outskirts",
+   "name": "Deathbird (Warmaster's Shack)"
   }
  ],
  "regions": [
@@ -44,8 +60,9 @@
   "Stormveil Castle",
   "Liurnia of the Lakes",
   "Caelid",
-  "Swamp of Aeonia"
+  "Swamp of Aeonia",
+  "Siofra River"
  ],
- "graces_found": 36,
- "save_modified": "2026-11-15T12:25:04"
+ "graces_found": 47,
+ "save_modified": "2026-11-21T20:13:50"
 }
